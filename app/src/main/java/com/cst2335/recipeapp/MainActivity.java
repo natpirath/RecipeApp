@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(goToResult);
         });
         findViewById(R.id.fragmentPageBtn).setOnClickListener((click) ->{
-            Intent goToFragment = new Intent(MainActivity.this, FragmentPage.class);
+            Intent goToFragment = new Intent(MainActivity.this, RecipePage.class);
             startActivity(goToFragment);
         });
         findViewById(R.id.favouritesPageBtn).setOnClickListener((click) ->{

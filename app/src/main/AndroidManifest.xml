@@ -17,7 +17,6 @@
             android:name=".Favourites"
             android:exported="false" />
         <activity
-            android:name=".FragmentPage"
             android:name=".RecipePage"
             android:exported="false" />
         <activity
