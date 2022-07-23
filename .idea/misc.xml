@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_baseline_star_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_star_border_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/toggle_selector.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_recipe_page.xml" value="0.29583333333333334" />
         <entry key="..\:/Users/caner/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/activity_favourites.xml" value="0.21927083333333333" />
         <entry key="..\:/Users/caner/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/activity_main.xml" value="0.21927083333333333" />
       </map>
