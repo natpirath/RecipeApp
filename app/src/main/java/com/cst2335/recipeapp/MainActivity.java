@@ -29,7 +29,5 @@ public class MainActivity extends AppCompatActivity {
             startActivity(goToFavourites);
         });
 
-
-
     }
 }
