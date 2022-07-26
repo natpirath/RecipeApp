@@ -7,8 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.cst2335.recipeapp.model.Meals;
 
 import java.util.ArrayList;
 
@@ -19,9 +23,12 @@ public class result_page extends AppCompatActivity {
     MyListAdapter myAdapter;
     ListView resultListView;
     Button addBtn;
-    ArrayList<Detail> detailsList = new ArrayList<>(); //Detail object Array to store info of the list item
+    ArrayList<Meals> detailsList = new ArrayList<>(); //Detail object Array to store info of the list item
     TextView recipeName, category; //text views to set their text
+    ImageView thumbnail;
     String mealName;
+    String mealThumb;
+    String idMeal;
     ArrayList<String> categories;
 
     @Override
@@ -36,10 +43,12 @@ public class result_page extends AppCompatActivity {
         addBtn.setOnClickListener( click -> {
             //here we need to store the meal name and the categories form the API, for now I use fixed text
             mealName = "Shakshuka";
-            categories =  new ArrayList<>();
-            categories.add("Breakfast");
-            categories.add("Vegan");
-            detailsList.add(new Detail(mealName, categories));
+            mealThumb = "https://www.themealdb.com/images/media/meals/g373701551450225.jpg";
+            idMeal = "52963";
+            //categories =  new ArrayList<>();
+            //categories.add("Breakfast");
+            //categories.add("Vegan");
+            detailsList.add(new Meals(idMeal, mealName, mealThumb));
             myAdapter.notifyDataSetChanged();
         });
 
@@ -90,9 +99,19 @@ public class result_page extends AppCompatActivity {
 
             //set what the text should be in this layout's text views:
             recipeName = newView.findViewById(R.id.tv_meal_name);
-            category = newView.findViewById(R.id.tv_categories);
             recipeName.setText( detailsList.get(position).getMealName() );
-            category.setText( String.join(", ", detailsList.get(position).getCategories()) );
+
+            category = newView.findViewById(R.id.tv_categories);
+            category.setText( "Vegetarian" );
+
+            // set the background image of the cardView "the meal image"
+            String url = detailsList.get(position).getMealThumb();
+            thumbnail = newView.findViewById(R.id.meal_img);
+            // using Glide library we can load an image form an url into an imageView
+            // placeholder is what shows while the image is loading
+            Glide.with(newView)
+                    .load(url)
+                    .into(thumbnail);
 
             //return it to be put in the table
             return newView;
