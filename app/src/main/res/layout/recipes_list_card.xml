@@ -22,8 +22,8 @@
             android:id="@+id/meal_img"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:src="@drawable/cooking_image"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ryppsv1511815505"
             android:tint="#4D000000"
             tools:ignore="UseAppTint" />
 
@@ -54,7 +54,7 @@
             android:id="@+id/tv_categories"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Beef, Checken "
+            android:text="Breakfast "
             android:textAlignment="viewStart"
             android:textColor="#FFFFFF"
             android:layout_marginTop="75dp"
