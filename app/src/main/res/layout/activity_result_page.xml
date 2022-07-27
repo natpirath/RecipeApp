@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".result_page">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_help"
+        tools:ignore="SpeakableTextPresentCheck" />
+
     <ListView
         android:id="@+id/list_view_SR"
         android:layout_width="match_parent"
@@ -20,6 +32,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
     </ListView>
+
 
     <Button
         android:id="@+id/addBtn"
