@@ -1,5 +1,6 @@
 package com.cst2335.recipeapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.cst2335.recipeapp.model.Meals;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -26,10 +28,7 @@ public class result_page extends AppCompatActivity {
     ArrayList<Meals> detailsList = new ArrayList<>(); //Detail object Array to store info of the list item
     TextView recipeName, category; //text views to set their text
     ImageView thumbnail;
-    String mealName;
-    String mealThumb;
-    String idMeal;
-    ArrayList<String> categories;
+    String mealName, mealThumb, idMeal, strCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +40,25 @@ public class result_page extends AppCompatActivity {
 
         addBtn = findViewById(R.id.addBtn);
         addBtn.setOnClickListener( click -> {
-            //here we need to store the meal name and the categories form the API, for now I use fixed text
+            //here we need to store the data form the API, for now I use fixed text for testing
             mealName = "Shakshuka";
             mealThumb = "https://www.themealdb.com/images/media/meals/g373701551450225.jpg";
             idMeal = "52963";
-            //categories =  new ArrayList<>();
-            //categories.add("Breakfast");
-            //categories.add("Vegan");
+            strCategory = "Vegetarian";
+
             detailsList.add(new Meals(idMeal, mealName, mealThumb));
             myAdapter.notifyDataSetChanged();
-        });
+        }); // end addBtn onClick
+
+        // FAB when clicked will show AlertDialog with "help" instructions on how to use the layout
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener( clickFab -> {
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+            dialogBuilder.setTitle(R.string.help)
+                    .setMessage(R.string.search_result_help)
+                    .setNegativeButton("Close", (click, arg) -> {})
+                    .create().show();
+        }); //end fab onClick
 
     }
 
@@ -107,7 +115,7 @@ public class result_page extends AppCompatActivity {
             // set the background image of the cardView "the meal image"
             String url = detailsList.get(position).getMealThumb();
             thumbnail = newView.findViewById(R.id.meal_img);
-            // using Glide library we can load an image form an url into an imageView
+            // using Glide library we can load an image form a url into an imageView
             // placeholder is what shows while the image is loading
             Glide.with(newView)
                     .load(url)
@@ -118,24 +126,6 @@ public class result_page extends AppCompatActivity {
         }
     }
 
-    /**
-     * This class used for the details of the meal that will be displayed on the listView
-     *
-     */
-    private static class Detail {
-        String mealName;
-        ArrayList<String> categories;
-        long _id;
-
-        public Detail(String mealNameIn, ArrayList<String> categoriesIn) {
-            this.mealName = mealNameIn;
-            this.categories = categoriesIn;
-        }
-
-        public String getMealName() {return mealName;}
-
-        public ArrayList<String> getCategories() {return categories;}
-    }// end Detail Class
 
 }// end class result_page
 
