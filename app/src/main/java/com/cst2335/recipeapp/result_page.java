@@ -2,7 +2,11 @@ package com.cst2335.recipeapp;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +14,23 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.cst2335.recipeapp.model.Meals;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -29,6 +44,8 @@ public class result_page extends AppCompatActivity {
     TextView recipeName, category; //text views to set their text
     ImageView thumbnail;
     String mealName, mealThumb, idMeal, strCategory;
+    ProgressBar progressBar;
+    Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,16 +55,28 @@ public class result_page extends AppCompatActivity {
         resultListView = findViewById(R.id.list_view_SR);
         resultListView.setAdapter( myAdapter = new MyListAdapter());
 
+
+        /* progress bar is visible on screen */
+        progressBar = findViewById(R.id.SR_progressbar);
+        progressBar.setVisibility(View.VISIBLE);
+
         addBtn = findViewById(R.id.addBtn);
         addBtn.setOnClickListener( click -> {
+
+
+
+            JsonFetcher fetch = new JsonFetcher();
+            fetch.execute();
+
             //here we need to store the data form the API, for now I use fixed text for testing
-            mealName = "Shakshuka";
-            mealThumb = "https://www.themealdb.com/images/media/meals/g373701551450225.jpg";
-            idMeal = "52963";
+           // mealName = "Shakshuka";
+            //mealThumb = "https://www.themealdb.com/images/media/meals/g373701551450225.jpg";
+            //idMeal = "52963";
             strCategory = "Vegetarian";
 
-            detailsList.add(new Meals(idMeal, mealName, mealThumb));
-            myAdapter.notifyDataSetChanged();
+
+
+
         }); // end addBtn onClick
 
         // FAB when clicked will show AlertDialog with "help" instructions on how to use the layout
@@ -109,8 +138,6 @@ public class result_page extends AppCompatActivity {
             recipeName = newView.findViewById(R.id.tv_meal_name);
             recipeName.setText( detailsList.get(position).getMealName() );
 
-            category = newView.findViewById(R.id.tv_categories);
-            category.setText( "Vegetarian" );
 
             // set the background image of the cardView "the meal image"
             String url = detailsList.get(position).getMealThumb();
@@ -124,7 +151,93 @@ public class result_page extends AppCompatActivity {
             //return it to be put in the table
             return newView;
         }
-    }
+    }// end myListAdapter
+
+    private class JsonFetcher extends AsyncTask<String, Integer, String> {
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            try {
+                // URL object of the api we will use
+                URL url = new URL("https://www.themealdb.com/api/json/v1/1/filter.php?a=Canadian");
+                // open a connection with the url
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                // wait for data to be retrieved
+                InputStream response = urlConnection.getInputStream();
+                // in case we don't get any response
+                if(response == null){
+                    return "Data not fetched";
+                }
+
+                // reading the Json data:-
+                // build the json string from the input stream
+                BufferedReader reader = new BufferedReader(new InputStreamReader(response, "UTF-8"), 8);
+                StringBuilder strBuilder = new StringBuilder();
+
+                String line = null;
+                // read the lines in the string read from the response
+                while( (line = reader.readLine()) != null ) {
+                    strBuilder.append(line + "\n");
+                }
+                // return the Json string to be worked on in the onPostExecute() method
+                return strBuilder.toString();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }// end doInBackground
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            // after the doInBackground is done we make the progressbar invisible
+            progressBar.setVisibility(View.INVISIBLE);
+
+            // in case the data was not fetched
+            if( s != null && s.equalsIgnoreCase("Data not fetched") ) {
+                // show alert dialog with an error message
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+                dialogBuilder.setTitle(R.string.help)
+                        .setMessage(R.string.not_fetched)
+                        .setNegativeButton("Close", (click, arg) -> {})
+                        .create().show();
+                Log.e("json", "Data is not fetched");
+            }
+            // or if it was fetched, do the Json parsing
+            else {
+                try {
+                    // convert the string we built to JSON
+                    JSONObject jObject = new JSONObject(s);
+
+
+                    // fetch the Json array with the key "meals"
+                    JSONArray mealsArray = jObject.getJSONArray("meals");
+                    // this list is to store the Json meals objects that are inside the mealsArray
+                    ArrayList<JSONObject> mealsobjects = new ArrayList<>();
+
+                    JSONObject oneMeal = mealsArray.getJSONObject(0);
+
+                    mealName = oneMeal.getString("strMeal");
+                    mealThumb = oneMeal.getString("strMealThumb");
+                    idMeal = oneMeal.getString("idMeal");
+
+                    detailsList.add(new Meals(idMeal, mealName, mealThumb));
+                    myAdapter.notifyDataSetChanged();
+
+                    /*for (int i=0; i < mealsArray.length(); i++) {
+                        JSONObject
+
+                    }*/
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }// end JsonFetcher
 
 
 }// end class result_page
