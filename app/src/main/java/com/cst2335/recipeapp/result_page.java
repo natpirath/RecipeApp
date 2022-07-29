@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.cst2335.recipeapp.model.Meals;
@@ -46,38 +48,31 @@ public class result_page extends AppCompatActivity {
     String mealName, mealThumb, idMeal, strCategory;
     ProgressBar progressBar;
     Context context = this;
+    JsonFetcher fetch;
+    int resultCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_page);
 
+        // get the Intent extras that was passed in from mainActivity
+        Intent thisIntent = getIntent();
+        String area = thisIntent.getStringExtra("area");
+
         resultListView = findViewById(R.id.list_view_SR);
         resultListView.setAdapter( myAdapter = new MyListAdapter());
 
+        String api = "https://www.themealdb.com/api/json/v1/1/filter.php?a="+area;
 
         /* progress bar is visible on screen */
         progressBar = findViewById(R.id.SR_progressbar);
         progressBar.setVisibility(View.VISIBLE);
 
-        addBtn = findViewById(R.id.addBtn);
-        addBtn.setOnClickListener( click -> {
+        /* to fetch the data from the api */
+        fetch = new JsonFetcher();
+        fetch.execute(api);
 
-
-
-            JsonFetcher fetch = new JsonFetcher();
-            fetch.execute();
-
-            //here we need to store the data form the API, for now I use fixed text for testing
-           // mealName = "Shakshuka";
-            //mealThumb = "https://www.themealdb.com/images/media/meals/g373701551450225.jpg";
-            //idMeal = "52963";
-            strCategory = "Vegetarian";
-
-
-
-
-        }); // end addBtn onClick
 
         // FAB when clicked will show AlertDialog with "help" instructions on how to use the layout
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -157,11 +152,11 @@ public class result_page extends AppCompatActivity {
 
 
         @Override
-        protected String doInBackground(String... strings) {
+        protected String doInBackground(String... args) {
 
             try {
                 // URL object of the api we will use
-                URL url = new URL("https://www.themealdb.com/api/json/v1/1/filter.php?a=Canadian");
+                URL url = new URL(args[0]);
                 // open a connection with the url
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 // wait for data to be retrieved
@@ -218,19 +213,23 @@ public class result_page extends AppCompatActivity {
                     // this list is to store the Json meals objects that are inside the mealsArray
                     ArrayList<JSONObject> mealsobjects = new ArrayList<>();
 
-                    JSONObject oneMeal = mealsArray.getJSONObject(0);
 
-                    mealName = oneMeal.getString("strMeal");
-                    mealThumb = oneMeal.getString("strMealThumb");
-                    idMeal = oneMeal.getString("idMeal");
+                    for (int i=0; i < mealsArray.length(); i++) {
+                        JSONObject oneMeal = mealsArray.getJSONObject(i);
 
-                    detailsList.add(new Meals(idMeal, mealName, mealThumb));
-                    myAdapter.notifyDataSetChanged();
+                        mealName = oneMeal.getString("strMeal");
+                        mealThumb = oneMeal.getString("strMealThumb");
+                        idMeal = oneMeal.getString("idMeal");
 
-                    /*for (int i=0; i < mealsArray.length(); i++) {
-                        JSONObject
+                        detailsList.add(new Meals(idMeal, mealName, mealThumb));
+                        myAdapter.notifyDataSetChanged();
 
-                    }*/
+                    }
+
+                    // the count of items that will be set on the listView
+                    resultCount = mealsArray.length();
+                    Toast.makeText(context, "we found "+resultCount+" results", Toast.LENGTH_LONG).show();
+
 
                 } catch (Exception e) {
                     e.printStackTrace();
