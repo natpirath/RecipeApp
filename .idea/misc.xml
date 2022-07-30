@@ -4,10 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/caner/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/activity_favourites.xml" value="0.2768729641693811" />
+        <entry key="..\:/Users/caner/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/activity_fragment_container.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/caner/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/activity_home_page.xml" value="0.4" />
         <entry key="..\:/Users/caner/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/activity_main.xml" value="0.21927083333333333" />
-        <entry key="..\:/Users/caner/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/activity_recipe_page.xml" value="0.3009833262077811" />
-        <entry key="..\:/Users/caner/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/activity_result_page.xml" value="0.2" />
+        <entry key="..\:/Users/caner/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/activity_recipe_page.xml" value="0.4" />
+        <entry key="..\:/Users/caner/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/activity_result_page.xml" value="0.264" />
         <entry key="..\:/Users/caner/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/drawer_menu.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/caner/AndroidStudioProjects/RecipeApp/app/src/main/res/menu/activity_menu.xml" value="0.2586575459598119" />
         <entry key="..\:/Users/caner/AndroidStudioProjects/RecipeApp/app/src/main/res/menu/drawer_menu.xml" value="0.18697916666666667" />
