@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">RecipeApp</string>
+    <string name="help">Help</string>
+    <string name="search_result_help">This is your search results,
+                                    tap on any meal to take you to the details,
+                                    you can go to your favorites by clicking on the icon
+                                    in the toolbar or the navigation drawer.</string>
+    <string name="not_fetched">Error: Data is not fetched</string>
 </resources>
