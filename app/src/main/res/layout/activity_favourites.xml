@@ -6,9 +6,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-
-
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -20,8 +17,6 @@
         app:title="Favourites"
         app:titleTextColor="@color/design_default_color_background"
         app:subtitleTextColor="@color/design_default_color_background"/>
-
-
 
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -46,11 +41,6 @@
         </ListView>
 
     </androidx.drawerlayout.widget.DrawerLayout>
-
-
-
-
-
 
 
 </LinearLayout>
