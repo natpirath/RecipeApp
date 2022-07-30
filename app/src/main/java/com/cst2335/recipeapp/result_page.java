@@ -2,7 +2,7 @@ package com.cst2335.recipeapp;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
+import com.cst2335.recipeapp.model.Meals;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -24,14 +23,12 @@ import com.cst2335.recipeapp.model.Meals;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -41,11 +38,10 @@ public class result_page extends AppCompatActivity {
     // fields to be initialized and used in the code
     MyListAdapter myAdapter;
     ListView resultListView;
-    Button addBtn;
     ArrayList<Meals> detailsList = new ArrayList<>(); //Detail object Array to store info of the list item
-    TextView recipeName, category; //text views to set their text
+    TextView recipeName; //text view to set its text
     ImageView thumbnail;
-    String mealName, mealThumb, idMeal, strCategory;
+    String mealName, mealThumb, idMeal;
     ProgressBar progressBar;
     Context context = this;
     JsonFetcher fetch;
@@ -84,6 +80,22 @@ public class result_page extends AppCompatActivity {
                     .create().show();
         }); //end fab onClick
 
+        // this is to react on clicking on any list item, it should take us to the container activity that loads RecipePage fragment
+        resultListView.setOnItemClickListener( (list, view, position, id) -> {
+            // a toast message with the name of the meal clicked
+            Toast.makeText(this,
+                    "Recipe for "+myAdapter.getItem(position).getMealName(),
+                        Toast.LENGTH_LONG).show();
+            // name of the meal clicked in a bundle to be passed to a fragment
+            Bundle fragmentData =new Bundle();
+            fragmentData.putString("idMeal", myAdapter.getItem(position).getIdMeal());
+
+            Intent recipeFrag = new Intent(this, FragmentContainer.class);
+            recipeFrag.putExtras(fragmentData);
+            startActivity(recipeFrag);
+
+        });
+
     }
 
     /**
@@ -104,7 +116,7 @@ public class result_page extends AppCompatActivity {
          * @param position index of the object to be displayed.
          * @return the object that will be displayed.
          */
-        public Object getItem(int position) { return detailsList.get(position); }
+        public Meals getItem(int position) { return detailsList.get(position); }
 
         /**
          * this function used to get the database ID of the object in the database.
@@ -131,11 +143,11 @@ public class result_page extends AppCompatActivity {
 
             //set what the text should be in this layout's text views:
             recipeName = newView.findViewById(R.id.tv_meal_name);
-            recipeName.setText( detailsList.get(position).getMealName() );
+            recipeName.setText( getItem(position).getMealName() );
 
 
             // set the background image of the cardView "the meal image"
-            String url = detailsList.get(position).getMealThumb();
+            String url = getItem(position).getMealThumb();
             thumbnail = newView.findViewById(R.id.meal_img);
             // using Glide library we can load an image form a url into an imageView
             // placeholder is what shows while the image is loading
@@ -174,7 +186,7 @@ public class result_page extends AppCompatActivity {
                 String line = null;
                 // read the lines in the string read from the response
                 while( (line = reader.readLine()) != null ) {
-                    strBuilder.append(line + "\n");
+                    strBuilder.append(line).append("\n");
                 }
                 // return the Json string to be worked on in the onPostExecute() method
                 return strBuilder.toString();
@@ -185,6 +197,12 @@ public class result_page extends AppCompatActivity {
             return null;
         }// end doInBackground
 
+        /**
+         * this method runs on the main UI thread and controls it.
+         * it reads data form the Json string provided by the doInBackground, and passes them to
+         * a new Meals object to be viewed on the listView.
+         * @param s the returned string from doInBackground() method
+         */
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);

@@ -30,8 +30,9 @@
         android:textColor="@color/black"
         android:textSize="25dp"
         app:layout_constraintBottom_toTopOf="@+id/CategoryName"
-        app:layout_constraintTop_toBottomOf="@+id/headerImage"
-        tools:layout_editor_absoluteX="11dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerImage" />
 
 
     <ImageView
@@ -39,8 +40,9 @@
         android:layout_width="392dp"
         android:layout_height="158dp"
         android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="4dp"
         tools:srcCompat="@drawable/cooking_image" />
 
     <TextView
