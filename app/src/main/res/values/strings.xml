@@ -6,4 +6,6 @@
                                     you can go to your favorites by clicking on the icon
                                     in the toolbar or the navigation drawer.</string>
     <string name="not_fetched">Error: Data is not fetched</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>
