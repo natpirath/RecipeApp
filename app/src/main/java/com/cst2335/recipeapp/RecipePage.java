@@ -8,35 +8,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class RecipePage extends Fragment {
 
-    // Required empty public constructor
-    public RecipePage() { }
+        @Override
+        public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle
+        savedInstanceState){
 
-    /* onCreate() is not used in a fragment
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipe_page);
-    }
+            View recipePage = inflater.inflate(R.layout.activity_recipe_page, container, false);
 
-    public void onCustomToggleClick(View view) {
-        Toast.makeText(this, "Toggle",Toast.LENGTH_SHORT).show();
-    }
-    */
+            Bundle passedData = getArguments();
 
-    @Override
-    public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            TextView tv_test = recipePage.findViewById(R.id.textView2);
+            tv_test.setText("ONLY TESTING: Meal ID from API is  " + passedData.getString("idMeal"));
 
-        View recipePage =inflater.inflate(R.layout.activity_recipe_page, container, false);
+            return recipePage;
+        }
 
-        Bundle passedData = getArguments();
-
-        TextView tv_test = recipePage.findViewById(R.id.textView2);
-        tv_test.setText("ONLY TESTING: Meal ID from API is  "+passedData.getString("idMeal"));
-
-        return recipePage;
-    }
+//        public void onCustomToggleClick(View view) {
+//            Toast.makeText(this, "Toggle", Toast.LENGTH_SHORT).show();
+//        }
 }
