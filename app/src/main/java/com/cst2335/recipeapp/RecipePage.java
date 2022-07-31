@@ -1,7 +1,6 @@
 package com.cst2335.recipeapp;
 
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.os.AsyncTask;
@@ -61,7 +60,7 @@ public class RecipePage extends Fragment {
         Bundle passedData = getArguments();
         idMeal = passedData.getString("idMeal");
 
-        String api = "https://www.themealdb.com/api/json/v1/1/filter.php?a=french";
+        String api = "https://www.themealdb.com/api/json/v1/1/lookup.php?i="+idMeal;
         JsonFetcher fetcher = new JsonFetcher();
         fetcher.execute(api);
 
