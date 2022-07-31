@@ -51,17 +51,19 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
     ArrayList<Meals> detailsList = new ArrayList<>(); //Detail object Array to store info of the list item
     TextView recipeName; //text view to set its text
     ImageView thumbnail;
-    String mealName, mealThumb, idMeal;
+    String mealName, mealThumb, idMeal, area;
     ProgressBar progressBar;
     Context context = this;
     JsonFetcher fetch;
     int resultCount;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_page);
 
+        // For ToolBar
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
 
@@ -77,8 +79,14 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
 
         // get the Intent extras that was passed in from mainActivity
         Intent thisIntent = getIntent();
-        String area = thisIntent.getStringExtra("area");
-
+        String areaPassed = thisIntent.getStringExtra("area");
+        // if the activity accessed from toolbar and not from the search page
+        if(areaPassed == null) {
+            area = "Canadian"; // default area to get it meals
+        }
+        else {
+            area = thisIntent.getStringExtra("area"); // whatever is passed form the search page.
+        }
         resultListView = findViewById(R.id.list_view_SR);
         resultListView.setAdapter( myAdapter = new MyListAdapter());
 
@@ -119,7 +127,7 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
 
         });
 
-    }
+    } // end onCreate method
 
     /**
      * Adapter for the listView to show the items in the list
@@ -251,8 +259,6 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
 
                     // fetch the Json array with the key "meals"
                     JSONArray mealsArray = jObject.getJSONArray("meals");
-                    // this list is to store the Json meals objects that are inside the mealsArray
-                    ArrayList<JSONObject> mealsobjects = new ArrayList<>();
 
 
                     for (int i=0; i < mealsArray.length(); i++) {
@@ -301,8 +307,10 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
                 break;
             case R.id.cook_item:
                 message = "You clicked on cook";
-                Intent ii = new Intent (getApplicationContext(), result_page.class);
-                startActivity(ii);
+                // this will stop the activity and start it again, instead of starting
+                // a new activity over the existent one.
+                this.finish();
+                this.startActivity(getIntent());
                 break;
             case R.id.favourites_item:
                 message = "You clicked on favourites";
@@ -339,7 +347,7 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(GravityCompat.START);
-        return false;
+        return true;
     }
 
 
