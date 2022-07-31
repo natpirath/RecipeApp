@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">RecipeApp</string>
+    <string name="SendToEmailButton">Send</string>
+    <string name="EmailSenderHeader">Send the recipe to your e-mail: </string>
+    <string name="categoryHeader">Category: </string>
 </resources>
