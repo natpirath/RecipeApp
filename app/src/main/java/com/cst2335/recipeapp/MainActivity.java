@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
         });
         findViewById(R.id.resultPageBtn).setOnClickListener((click) ->{
             Intent goToResult = new Intent(MainActivity.this, result_page.class);
+            EditText et_area = findViewById(R.id.et_area);
+            goToResult.putExtra("area", et_area.getText().toString());
             startActivity(goToResult);
         });
         findViewById(R.id.fragmentPageBtn).setOnClickListener((click) ->{
@@ -28,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
             Intent goToFavourites = new Intent(MainActivity.this, Favourites.class);
             startActivity(goToFavourites);
         });
-
-
 
     }
 }
