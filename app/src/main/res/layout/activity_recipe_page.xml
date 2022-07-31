@@ -13,6 +13,7 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/headerImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,15 +22,24 @@
         app:title="Recipe"
         app:titleTextColor="@color/design_default_color_background" />
 
+    <ImageView
+        android:id="@+id/headerImage"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/mealName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.0"
+        android:src="@drawable/cooking_image" />
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:visibility="invisible"
         android:layout_centerInParent="true"
-        android:layout_marginStart="155dp"
-        android:layout_marginTop="292dp"
-        android:layout_marginEnd="156dp"
-        android:layout_marginBottom="339dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,88 +48,70 @@
 
     <TextView
         android:id="@+id/mealName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Here is the Recipe name"
         android:textColor="@color/black"
-        android:textSize="25dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.221"
+        android:textSize="25sp"
+
+        app:layout_constraintBottom_toTopOf="@+id/categoryHeader"
+        app:layout_constraintEnd_toStartOf="@+id/starIcon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headerImage" />
 
-    <ImageView
-        android:id="@+id/headerImage"
-        android:layout_width="390dp"
-        android:layout_height="113dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.0"
-        tools:srcCompat="@drawable/cooking_image" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="381dp"
-        android:layout_height="194dp"
-        android:layout_marginTop="65dp"
-        android:lineSpacingExtra="8sp"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        android:textAlignment="viewStart"
-        android:textSize="14sp"
-        android:typeface="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CategoryName"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="15dp" />
-
     <ToggleButton
+        android:id="@+id/starIcon"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginStart="65dp"
-        android:layout_marginTop="91dp"
-        android:layout_marginBottom="92dp"
         android:background="@drawable/toggle_selector"
-        android:onClick="onCustomToggleClick"
+
         android:textOff=""
         android:textOn=""
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/mealName"
-        app:layout_constraintTop_toBottomOf="@+id/headerImage"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@id/headerImage"
+        app:layout_constraintStart_toEndOf="@id/mealName"
+        app:layout_constraintBottom_toTopOf="@id/categoryHeader"
+        />
+    <!-- android:onClick="onCustomToggleClick" -->
 
     <TextView
         android:id="@+id/categoryHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="9dp"
-        android:layout_marginBottom="65dp"
+        android:layout_margin="5dp"
+        android:layout_marginTop="5dp"
         android:text="Category: "
         android:textSize="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toStartOf="@+id/CategoryName"
-        app:layout_constraintTop_toBottomOf="@+id/mealName" />
+        app:layout_constraintEnd_toStartOf="@id/CategoryName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mealName" />
 
     <TextView
         android:id="@+id/CategoryName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="85dp"
-        android:layout_marginTop="225dp"
-        android:layout_marginEnd="193dp"
-        android:layout_marginBottom="486dp"
+        android:layout_marginTop="5dp"
         android:text="Category name here"
         android:textSize="15dp"
         android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_instructions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/categoryHeader"
+        app:layout_constraintTop_toBottomOf="@id/mealName" />
+
+    <TextView
+        android:id="@+id/tv_instructions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:lineSpacingExtra="8sp"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        android:textAlignment="viewStart"
+        android:textSize="14sp"
+        android:typeface="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+        app:layout_constraintTop_toBottomOf="@+id/CategoryName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

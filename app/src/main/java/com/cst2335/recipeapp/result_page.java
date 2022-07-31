@@ -127,7 +127,7 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
 
         });
 
-    }
+    } // end onCreate method
 
     /**
      * Adapter for the listView to show the items in the list
@@ -259,8 +259,6 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
 
                     // fetch the Json array with the key "meals"
                     JSONArray mealsArray = jObject.getJSONArray("meals");
-                    // this list is to store the Json meals objects that are inside the mealsArray
-                    ArrayList<JSONObject> mealsobjects = new ArrayList<>();
 
 
                     for (int i=0; i < mealsArray.length(); i++) {

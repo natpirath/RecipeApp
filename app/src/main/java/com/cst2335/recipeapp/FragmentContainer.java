@@ -13,12 +13,12 @@ public class FragmentContainer extends AppCompatActivity {
 
         Bundle passedData = getIntent().getExtras();
 
-        RecipePage dtFragment = new RecipePage( );
-        dtFragment.setArguments(passedData);
+        RecipePage recipeFragment = new RecipePage( );
+        recipeFragment.setArguments(passedData);
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragFrameLayout, dtFragment)
+                .replace(R.id.fragFrameLayout, recipeFragment)
                 . commit();
     }
 }
