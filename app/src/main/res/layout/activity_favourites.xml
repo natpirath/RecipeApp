@@ -1,37 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Favourites">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:subtitle="Caner Altun 1.0"
+        app:title="Favourites"
+        app:titleTextColor="@color/design_default_color_background"
+        app:subtitleTextColor="@color/design_default_color_background"/>
 
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="401dp"
-        android:layout_height="31dp"
-        android:layout_marginBottom="4dp"
-        android:text="Favourites"
-        android:textAlignment="center"
-        android:textSize="25dp"
-        app:layout_constraintBottom_toTopOf="@+id/listView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:openDrawer="start">
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="410dp"
-        android:layout_height="999dp"
-        android:divider="#000"
-        android:dividerHeight="3dp"
-        android:footerDividersEnabled="false"
-        android:headerDividersEnabled="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.54" />
+        <com.google.android.material.navigation.NavigationView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:menu="@menu/drawer_menu"
+            android:id="@+id/nav_view"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+
+</LinearLayout>

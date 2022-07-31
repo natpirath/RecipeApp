@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/help_item"
+        android:icon="@android:drawable/ic_menu_help"
+        android:orderInCategory="200"
+        android:title="help"
+        app:showAsAction="ifRoom"/> <!-- This uses showAsAction=never, so look at title= parameter -->
+
+    <item
+        android:id="@+id/favourites_item"
+        android:orderInCategory="75"
+        android:icon="@drawable/favouritesicon"
+        android:title="favourites"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/home_item"
+        android:orderInCategory="60"
+        android:icon="@drawable/homeicon"
+        android:title="home"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/cook_item"
+        android:orderInCategory="70"
+        android:icon="@drawable/cookicon"
+        android:title="recipes"
+        app:showAsAction="always"/>
+
+
+
+</menu>
+
