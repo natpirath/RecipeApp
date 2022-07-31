@@ -57,8 +57,10 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             //what to do when the menu item is selected:
             case R.id.home_item:
                 message = "You clicked on home";
-                Intent i = new Intent (getApplicationContext(), HomePage.class);
-                startActivity(i);
+                // this will stop the activity and start it again, instead of starting
+                // a new activity over the existent one.
+                this.finish();
+                this.startActivity(getIntent());
                 break;
             case R.id.cook_item:
                 message = "You clicked on cook";

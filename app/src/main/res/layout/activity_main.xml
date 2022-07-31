@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_instructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="enter area then click resul page button"
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
         android:text="Result Page"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/tv_instructions"
         app:layout_constraintEnd_toStartOf="@+id/favouritesPageBtn"
         app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent" />
@@ -58,7 +58,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="64dp"
         android:text="Favourites"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/tv_instructions"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
@@ -69,6 +69,7 @@
         android:ems="10"
         android:hint="enter Area"
         android:inputType="textPersonName"
+        android:text="canadian"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resultPageBtn" />
 

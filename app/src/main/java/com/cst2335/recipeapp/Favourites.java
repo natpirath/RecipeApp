@@ -150,6 +150,10 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
                 break;
             case R.id.favourites_item:
                 message = "You clicked on favourites";
+                // this will stop the activity and start it again, instead of starting
+                // a new activity over the existent one.
+                this.finish();
+                this.startActivity(getIntent());
                 break;
             case R.id.help_item:
                 message = "You clicked on help";
