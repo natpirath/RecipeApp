@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 
 public class RecipePage extends Fragment {
@@ -25,6 +26,8 @@ public class RecipePage extends Fragment {
             tv_test.setText("ONLY TESTING: Meal ID from API is  " + passedData.getString("idMeal"));
 
             return recipePage;
+
+
         }
 
 //        public void onCustomToggleClick(View view) {
