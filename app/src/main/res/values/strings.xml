@@ -8,6 +8,7 @@
                                     tap on any meal to take you to the details,
                                     you can go to your favorites by clicking on the icon
                                     in the toolbar or the navigation drawer.</string>
+    <string name="search_help">This is your search page. In order to start, type a country to which has a recipe you desire. once ready click search!</string>
     <string name="not_fetched">Error: Data is not fetched</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
