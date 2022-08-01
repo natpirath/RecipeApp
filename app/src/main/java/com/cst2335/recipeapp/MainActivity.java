@@ -2,6 +2,7 @@ package com.cst2335.recipeapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,6 +35,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        // FAB when clicked will show AlertDialog with "help" instructions on how to use the layout
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener( clickFab -> {
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+            dialogBuilder.setTitle(R.string.help)
+                    .setMessage(R.string.search_help)
+                    .setNegativeButton("Close", (click, arg) -> {})
+                    .create().show();
+        }); //end fab onClick
+
+
 
         et_area = findViewById(R.id.et_area);
         img = findViewById(R.id.ImgRandom);
