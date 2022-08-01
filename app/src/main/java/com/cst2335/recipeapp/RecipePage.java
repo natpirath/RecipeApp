@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.cst2335.recipeapp.model.Meals;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -33,7 +34,8 @@ public class RecipePage extends Fragment {
     private View view;
 
     // Required empty public constructor
-    public RecipePage() { }
+    public RecipePage() {
+    }
 
 
     /* onCreate() is not used in a fragment the course slides says, but maybe it can be used I don't know */
@@ -50,9 +52,9 @@ public class RecipePage extends Fragment {
     }
 
     @Override
-    public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View recipePage =inflater.inflate(R.layout.activity_recipe_page, container, false);
+        View recipePage = inflater.inflate(R.layout.activity_recipe_page, container, false);
 
         ProgressBar progressBar = recipePage.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
@@ -60,17 +62,15 @@ public class RecipePage extends Fragment {
         Bundle passedData = getArguments();
         idMeal = passedData.getString("idMeal");
 
-        String api = "https://www.themealdb.com/api/json/v1/1/lookup.php?i="+idMeal;
+        String api = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + idMeal;
         JsonFetcher fetcher = new JsonFetcher();
         fetcher.execute(api);
 
-            TextView tv_test = recipePage.findViewById(R.id.textView2);
-            tv_test.setText("ONLY TESTING: Meal ID from API is  " + passedData.getString("idMeal"));
+        TextView tv_test = recipePage.findViewById(R.id.textView2);
+        tv_test.setText("ONLY TESTING: Meal ID from API is  " + passedData.getString("idMeal"));
 
         return recipePage;
     }
-
-
 
 
     private class JsonFetcher extends AsyncTask<String, Integer, String> {
@@ -83,14 +83,14 @@ public class RecipePage extends Fragment {
                 Log.e(TAG, "in doInBackground");
                 // URL object of the api we will use
                 URL url = new URL(args[0]);
-                Log.e(TAG, "url: "+url);
+                Log.e(TAG, "url: " + url);
                 // open a connection with the url
                 HttpURLConnection Connection = (HttpURLConnection) url.openConnection();
                 // wait for data to be retrieved
                 InputStream stream = Connection.getInputStream();
-                Log.e(TAG, "stream: "+stream);
+                Log.e(TAG, "stream: " + stream);
                 // in case we don't get any stream
-                if(stream == null){
+                if (stream == null) {
                     return "Data not fetched";
                 }
 
@@ -101,7 +101,7 @@ public class RecipePage extends Fragment {
 
                 String line1 = null;
                 // read the lines in the string read from the stream
-                while( (line1 = myReader.readLine()) != null ) {
+                while ((line1 = myReader.readLine()) != null) {
                     stringBuilder.append(line1).append("\n");
                 }
                 // return the Json string to be worked on in the onPostExecute() method
@@ -118,18 +118,19 @@ public class RecipePage extends Fragment {
          * this method runs on the main UI thread and controls it.
          * it reads data form the Json string provided by the doInBackground, and passes them to
          * a new Meals object to be viewed on the listView.
+         *
          * @param s1 the returned string from doInBackground() method
          */
         @Override
         protected void onPostExecute(String s1) {
             super.onPostExecute(s1);
             Log.e(TAG, "in onPostExecute");
-            Log.e(TAG, "result from fetching: "+s1);
+            Log.e(TAG, "result from fetching: " + s1);
             // after the doInBackground is done we make the progressbar invisible
-           // progressBar.setVisibility(View.INVISIBLE);
+            // progressBar.setVisibility(View.INVISIBLE);
 
             // in case the data was not fetched
-            if( s1 != null && s1.equalsIgnoreCase("Data not fetched") ) {
+            if (s1 != null && s1.equalsIgnoreCase("Data not fetched")) {
                 // show alert dialog with an error message
                 /*AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
                 dialogBuilder.setTitle(R.string.help)
@@ -137,8 +138,7 @@ public class RecipePage extends Fragment {
                         .setNegativeButton("Close", (click, arg) -> {})
                         .create().show();*/
                 Log.e(TAG, "Data is not fetched");
-            }
-            else if(s1 == null){
+            } else if (s1 == null) {
                 Log.e(TAG, " s1 is null");
             }
             // or if it was fetched, do the Json parsing
@@ -146,3 +146,10 @@ public class RecipePage extends Fragment {
                 try {
                     // convert the string we built to JSON
                     JSONObject jsonObject = new JSONObject(s1);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+}
