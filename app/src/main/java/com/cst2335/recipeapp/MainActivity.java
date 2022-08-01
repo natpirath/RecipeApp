@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -25,6 +26,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     SharedPreferences sp;
     private static final String SP_NAME = "myPref";
     EditText et_area;
+    ImageView img;
+    Toolbar myToolbar;
+    DrawerLayout drawer;
+    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,22 +50,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         et_area = findViewById(R.id.et_area);
-
-        Toolbar myToolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(myToolbar);
+        img = findViewById(R.id.ImgRandom);
 
         sp = getSharedPreferences(SP_NAME, MODE_PRIVATE);
+        et_area.setText(sp.getString("area", ""));
 
-        et_area.setText(sp.getString("area", null));
+        myToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+
 
         //For NavigationDrawer:
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
                 drawer, myToolbar, R.string.open, R.string.close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -123,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    public boolean onNavigationItemSelected(MenuItem item) {
         String message = null;
         switch (item.getItemId()){
             case R.id.drawerHome:

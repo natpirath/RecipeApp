@@ -52,52 +52,78 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:srcCompat="@android:drawable/ic_menu_help"
                 tools:ignore="SpeakableTextPresentCheck" />
-            <ImageView
-                android:id="@+id/imageView"
+
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ImgRandom"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginTop="8dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
                 app:layout_constraintBottom_toTopOf="@+id/textView3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/cooking_image" />
+                app:srcCompat="@drawable/cooking_image"
+                style="@style/rounded"
+                app:shapeAppearanceOverlay="@style/rounded"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView3"
+                app:layout_constraintBottom_toTopOf="@id/resultPageBtn"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="15dp"
+                app:cardBackgroundColor="#79242424"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp">
+                <EditText
+                    android:id="@+id/et_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:padding="5dp"
+                    android:text="search your recipes"
+                    android:textSize="12sp"
+                    android:textColor="@color/white"
+                    android:gravity="center_vertical"
+                    android:drawableLeft="@drawable/ic_search_24"
+                    android:drawableStart="@drawable/ic_search_24"
+                    android:drawablePadding="10dp"/>
+
+            </androidx.cardview.widget.CardView>
 
             <Button
                 android:id="@+id/resultPageBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Result Page"
+                android:text="@string/search"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_area" />
+                app:layout_constraintTop_toBottomOf="@+id/cardSearch" />
 
-            <EditText
-                android:id="@+id/et_area"
-                android:layout_width="300dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="17dp"
-                android:ems="10"
-                android:hint="enter Area"
-                android:inputType="textPersonName"
-                app:layout_constraintBottom_toTopOf="@+id/resultPageBtn"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="58dp"
-                android:text="Enter an area to find recipe's"
+                android:text="@string/search_area"
                 android:textAlignment="center"
-                app:layout_constraintBottom_toTopOf="@+id/et_area"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@+id/cardSearch"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintTop_toBottomOf="@+id/ImgRandom" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
