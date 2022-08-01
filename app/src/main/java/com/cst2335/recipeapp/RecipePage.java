@@ -1,15 +1,12 @@
 package com.cst2335.recipeapp;
 
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
+
 import androidx.fragment.app.Fragment;
 
 import android.content.Context;
@@ -18,6 +15,7 @@ import android.content.SharedPreferences;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,13 +28,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -56,12 +50,7 @@ public class RecipePage extends Fragment {
     private ConstraintLayout constraintLayout;
     String emailStr;
     private EditText editTextEmail;
-
-
-
-
-
-
+    private TextView description;
 
 
     @Override
@@ -79,9 +68,13 @@ public class RecipePage extends Fragment {
         editTextEmail = recipePage.findViewById(R.id.editTextEmail);
         button = recipePage.findViewById(R.id.SendToEmailButton);
         constraintLayout = recipePage.findViewById(R.id.ConstraintLayout);
+        description = recipePage.findViewById(R.id.textView2);
 
         SharedPreferences prefs= this.getContext().getSharedPreferences("EmailPrefs", Context.MODE_PRIVATE);
         email = prefs.getString(EMAIL, "");
+
+        description.setMovementMethod(new ScrollingMovementMethod());
+
 
         /*
          * Set email address of Email Edit Text
@@ -186,6 +179,7 @@ public class RecipePage extends Fragment {
         }
             return true;
     }
+
 
 
     private class JsonFetcher extends AsyncTask<String, Integer, String> {
