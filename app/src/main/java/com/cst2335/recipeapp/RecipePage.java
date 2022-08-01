@@ -1,19 +1,25 @@
 package com.cst2335.recipeapp;
 
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cst2335.recipeapp.model.Meals;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,6 +38,14 @@ public class RecipePage extends Fragment {
     final String TAG = "recipeAct";
     String idMeal, mealName, mealThumb;
     private View view;
+    private String email;
+    Button button;
+    SharedPreferences sp;
+    public static final String EMAIL = "email";
+    private ConstraintLayout constraintLayout;
+    String emailStr;
+    private EditText editTextEmail;
+
 
     // Required empty public constructor
     public RecipePage() {
@@ -43,6 +57,9 @@ public class RecipePage extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+
+
 
     }
 
@@ -56,11 +73,45 @@ public class RecipePage extends Fragment {
 
         View recipePage = inflater.inflate(R.layout.activity_recipe_page, container, false);
 
+        //Finding Views by Id for the email Sender
+        editTextEmail = recipePage.findViewById(R.id.editTextEmail);
+        button = recipePage.findViewById(R.id.SendToEmailButton);
+        constraintLayout = recipePage.findViewById(R.id.ConstraintLayout);
+
+        SharedPreferences prefs= this.getContext().getSharedPreferences("EmailPrefs", Context.MODE_PRIVATE);
+        email = prefs.getString(EMAIL, "");
+
+        /*
+         * Set email address of Email Edit Text
+         */
+        editTextEmail.setText(email);
+
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               Snackbar snackbar = Snackbar
+                        .make(constraintLayout, "Email was sent", Snackbar.LENGTH_LONG)
+                        .setAction("UNDO", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Snackbar snackbar = Snackbar.make(constraintLayout, "Email wasn't sent", Snackbar.LENGTH_SHORT);
+                                snackbar.show();
+                            }
+                        });
+
+                snackbar.show();
+            }
+
+
+        });
         ProgressBar progressBar = recipePage.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
         Bundle passedData = getArguments();
         idMeal = passedData.getString("idMeal");
+
 
         String api = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + idMeal;
         JsonFetcher fetcher = new JsonFetcher();
@@ -70,7 +121,9 @@ public class RecipePage extends Fragment {
         tv_test.setText("ONLY TESTING: Meal ID from API is  " + passedData.getString("idMeal"));
 
         return recipePage;
+
     }
+
 
 
     private class JsonFetcher extends AsyncTask<String, Integer, String> {
@@ -152,4 +205,18 @@ public class RecipePage extends Fragment {
             }
         }
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        // save a user's email address
+        SharedPreferences sharedPreferences = this.getContext().getSharedPreferences("EmailPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(EMAIL, editTextEmail.getText().toString());
+
+        editor.apply();
+    }
 }
+
+
