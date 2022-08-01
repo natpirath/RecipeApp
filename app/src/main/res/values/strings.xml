@@ -11,4 +11,7 @@
     <string name="not_fetched">Error: Data is not fetched</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="search">Search</string>
+    <string name="enter_area">enter Area</string>
+    <string name="search_area">Enter an area to find recipes</string>
 </resources>
