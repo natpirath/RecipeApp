@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,11 +19,16 @@ import com.google.android.material.navigation.NavigationView;
 
 public class HomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
+    public static final String TAG = "PROFILE_ACTIVITY";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         //testting/
+        Log.e(TAG, " in function: " + "onCreate");
+
 
         //just did somthing
 
@@ -103,5 +109,36 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(GravityCompat.START);
         return false;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e(TAG, " in function: " + "onStart");
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.e(TAG, " in function: " + "onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e(TAG, " in function: " + "onDestroy");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e(TAG, " in function: " + "onPause");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e(TAG, " in function: " + "onResume");
     }
 }
