@@ -116,9 +116,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent iii = new Intent (getApplicationContext(), Favourites.class);
                 startActivity(iii);
                 break;
-            case R.id.help_item:
-                message = getString(R.string.helpItem);
-                break;
+
         }
         if ( message != null ) {
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
