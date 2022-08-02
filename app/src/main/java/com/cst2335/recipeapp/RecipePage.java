@@ -180,7 +180,7 @@ public class RecipePage extends Fragment {
             //what to do when the menu item is selected:
             case R.id.home_item:
                 message = "You clicked on home";
-                Intent i = new Intent (getActivity(), HomePage.class);
+                Intent i = new Intent (getActivity(), MainActivity.class);
                 startActivity(i);
                 break;
             case R.id.cook_item:
