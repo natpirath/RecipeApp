@@ -106,6 +106,21 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        listView.setOnItemClickListener( (list, view, position, id) -> {
+            // a toast message with the name of the meal clicked
+            Toast.makeText(this,
+                    "Recipe for "+myAdapter.getItem(position).getMealName(),
+                    Toast.LENGTH_SHORT).show();
+
+            // name of the meal clicked in a bundle to be passed to a fragment
+            Bundle fragmentData =new Bundle();
+            fragmentData.putString("idMeal", myAdapter.getItem(position).getIdMeal());
+
+            Intent recipeFrag = new Intent(this, FragmentContainer.class);
+            recipeFrag.putExtras(fragmentData);
+            startActivity(recipeFrag);
+        });
+
     }
 
     @Override
@@ -172,6 +187,8 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
         drawerLayout.closeDrawer(GravityCompat.START);
         return false;
     }
+
+
 
     private class MyListAdapter extends BaseAdapter {
 
