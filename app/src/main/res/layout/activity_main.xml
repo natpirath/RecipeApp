@@ -65,28 +65,29 @@
                 android:id="@+id/cardSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textView3"
-                app:layout_constraintBottom_toTopOf="@id/resultPageBtn"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginTop="15dp"
                 app:cardBackgroundColor="#79242424"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="0dp">
+                app:cardCornerRadius="15dp"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toTopOf="@id/resultPageBtn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView3">
+
                 <EditText
                     android:id="@+id/et_area"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="48dp"
+                    android:drawableStart="@drawable/ic_search_24"
+                    android:drawableLeft="@drawable/ic_search_24"
+                    android:drawablePadding="10dp"
+                    android:gravity="center_vertical"
                     android:padding="5dp"
                     android:text="@string/textOnSearchBar"
-                    android:textSize="12sp"
                     android:textColor="@color/white"
-                    android:gravity="center_vertical"
-                    android:drawableLeft="@drawable/ic_search_24"
-                    android:drawableStart="@drawable/ic_search_24"
-                    android:drawablePadding="10dp"/>
+                    android:textSize="14sp"
+                    tools:ignore="TouchTargetSizeCheck" />
 
             </androidx.cardview.widget.CardView>
 
@@ -94,12 +95,11 @@
                 android:id="@+id/resultPageBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:text="@string/search"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardSearch" />
+                app:layout_constraintTop_toBottomOf="@id/cardSearch" />
 
 
 
@@ -107,14 +107,24 @@
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="58dp"
                 android:text="@string/search_area"
                 android:textAlignment="center"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toTopOf="@+id/cardSearch"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ImgRandom" />
+                app:layout_constraintTop_toBottomOf="@id/ImgRandom" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/search_example"
+                android:textAlignment="center"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

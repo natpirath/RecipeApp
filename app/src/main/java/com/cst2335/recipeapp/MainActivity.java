@@ -9,7 +9,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,15 +22,20 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     SharedPreferences sp;
     private static final String SP_NAME = "myPref";
     EditText et_area;
-    ImageView img;
+    ImageView imageView;
     Toolbar myToolbar;
     DrawerLayout drawer;
     NavigationView navigationView;
+    ArrayList<Integer> randomImages = new ArrayList<Integer>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +53,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .create().show();
         }); //end fab onClick
 
+        // storing images in a list to show them randomly as a header image in the activity
+        randomImages.add(R.drawable.p1);
+        randomImages.add(R.drawable.p2);
+        randomImages.add(R.drawable.p3);
+        randomImages.add(R.drawable.p4);
+        randomImages.add(R.drawable.p5);
+        randomImages.add(R.drawable.p6);
+        randomImages.add(R.drawable.cooking_image);
+
 
 
         et_area = findViewById(R.id.et_area);
-        img = findViewById(R.id.ImgRandom);
+        imageView = findViewById(R.id.ImgRandom);
 
+        // getting the shared preferences and setting it in the search box
         sp = getSharedPreferences(SP_NAME, MODE_PRIVATE);
         et_area.setText(sp.getString("area", ""));
+
+        // setting a random image form the images array in the header image view
+        Random random = new Random();
+        int index = random.nextInt(randomImages.size());
+        imageView.setImageResource( ( randomImages.get(index) ) );
 
         myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
@@ -142,9 +164,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(i3);
                 break;
         }
-
+        //Log.e("navDraw", "item clicked: "+item.getItemId());
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(GravityCompat.START);
-        return false;
+        return true;
     }
 }
