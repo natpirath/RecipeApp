@@ -32,7 +32,7 @@
     <string name="emailWasSent">Email foi enviado</string>
     <string name="emailWasNOTSent">Email não foi enviado</string>
     <string name="recipes">Receitas</string>
-    <string name="search_example">exemplo: canadense / francesa / italiana / grega</string>
+    <string name="search_example">exemplo: canadian / french / italian / greek</string>
     <string name="makeChoice">Escolha</string>
     <string name="detailsOrRemove">Você deseja remover os detalhes ou remover dos favoritos</string>
     <string name="seeDetails">Ver detalhes</string>
