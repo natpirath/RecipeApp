@@ -13,10 +13,15 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+
+import com.cst2335.recipeapp.model.MyOpenHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -34,7 +39,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import android.widget.ToggleButton;
+
 import com.google.android.material.snackbar.Snackbar;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
@@ -47,7 +56,7 @@ import java.net.URL;
 public class RecipePage extends Fragment {
 
     final String TAG = "recipeAct";
-    String idMeal, mealName, mealThumb;
+    String idMeal, mealName, mealThumb, mealInst, mealCat;
     private View view;
     private String email;
     Button button;
@@ -59,10 +68,30 @@ public class RecipePage extends Fragment {
     private TextView description;
 
 
+
+
+    /**
+     * sets the view of the recipe page to be able to access it elements
+     * @param myView the view of the recipe
+     */
+    public void setView(View myView) {
+        this.view = myView;
+    }
+    /**
+     * gets the view that was set in the onCreateView() method to be able to access
+     * the recipe page elements.
+     * @return the view
+     */
+    public View getView(){
+        return this.view;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View recipePage = inflater.inflate(R.layout.activity_recipe_page, container, false);
+
+        setView(recipePage);
 
         // For ToolBar
         Toolbar toolbar = recipePage.findViewById(R.id.toolbar);
@@ -112,6 +141,7 @@ public class RecipePage extends Fragment {
         FloatingActionButton fab = recipePage.findViewById(R.id.fab);
         fab.setOnClickListener( clickFab -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            // TODO: change the message of the help to show instructions of how to use this activity
             builder.setTitle(R.string.help)
                     .setMessage(R.string.search_result_help)
                     .setNegativeButton("Close", (click, arg) -> {})
@@ -123,16 +153,7 @@ public class RecipePage extends Fragment {
         ProgressBar progressBar = recipePage.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
-        Bundle passedData = getArguments();
-        idMeal = passedData.getString("idMeal");
 
-
-        String api = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + idMeal;
-        JsonFetcher fetcher = new JsonFetcher();
-        fetcher.execute(api);
-
-        TextView tv_test = recipePage.findViewById(R.id.textView2);
-        tv_test.setText("ONLY TESTING: Meal ID from API is  " + passedData.getString("idMeal"));
 
         return recipePage;
 
@@ -143,6 +164,8 @@ public class RecipePage extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
+
+
 
     }
 
@@ -186,9 +209,11 @@ public class RecipePage extends Fragment {
 
 
 
-
     private class JsonFetcher extends AsyncTask<String, Integer, String> {
 
+
+        MyOpenHelper sqlOpener;
+        SQLiteDatabase theDatabase;
 
         @Override
         protected String doInBackground(String... args) {
@@ -222,7 +247,7 @@ public class RecipePage extends Fragment {
                 return stringBuilder.toString();
 
             } catch (Exception e) {
-                Log.e(TAG, "exception in doInBackground");
+                Log.e(TAG, "exception in doInBackground====");
                 e.printStackTrace();
             }
             return null;
@@ -238,6 +263,14 @@ public class RecipePage extends Fragment {
         @Override
         protected void onPostExecute(String s1) {
             super.onPostExecute(s1);
+
+            /* initialize the sqlHelper in onCreate */
+            sqlOpener = new MyOpenHelper(getActivity());
+            /* open the database as writable */
+            theDatabase = sqlOpener.getWritableDatabase();
+
+
+
             Log.e(TAG, "in onPostExecute");
             Log.e(TAG, "result from fetching: " + s1);
             // after the doInBackground is done we make the progressbar invisible
@@ -245,21 +278,57 @@ public class RecipePage extends Fragment {
 
             // in case the data was not fetched
             if (s1 != null && s1.equalsIgnoreCase("Data not fetched")) {
-                // show alert dialog with an error message
-                /*AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
-                dialogBuilder.setTitle(R.string.help)
-                        .setMessage(R.string.not_fetched)
-                        .setNegativeButton("Close", (click, arg) -> {})
-                        .create().show();*/
                 Log.e(TAG, "Data is not fetched");
+
             } else if (s1 == null) {
                 Log.e(TAG, " s1 is null");
             }
             // or if it was fetched, do the Json parsing
             else {
                 try {
+                    View theView = getView();
+
+                    ContentValues newRow = new ContentValues();
+
                     // convert the string we built to JSON
                     JSONObject jsonObject = new JSONObject(s1);
+
+                    // fetch the Json array with the key "meals", there's1 only one element in the array
+                    JSONArray jsonArray = jsonObject.getJSONArray("meals");
+                    // get the only Json object in this Json data
+                    JSONObject meal = jsonArray.getJSONObject(0);
+
+                    // here we retrieve each data and set it to it corresponding view in the activity
+                    mealName = meal.getString("strMeal");
+                    mealThumb = meal.getString("strMealThumb");
+                    idMeal = meal.getString("idMeal");
+                    mealInst = meal.getString("strInstructions");
+                    mealCat = meal.getString("strCategory");
+
+                    ToggleButton favBtn = theView.findViewById(R.id.toggleButton2);
+                    favBtn.setOnClickListener( clickFav -> {
+                        Log.e(TAG, "added to favorite: "+mealName);
+                        newRow.put(MyOpenHelper.COL_ID, idMeal);
+                        newRow.put(MyOpenHelper.COL_MEAL_NAME, mealName);
+                        newRow.put(MyOpenHelper.COL_IMAGE, mealThumb);
+
+                        theDatabase.insert(MyOpenHelper.TABLE_NAME, null, newRow);
+
+                    });
+
+                    Log.e(TAG, "meal name: "+ mealName);
+                    Log.e(TAG, "image URL: "+ mealThumb);
+                    Log.e(TAG, "idMeal: "+ idMeal);
+                    Log.e(TAG, "strCategory: "+ mealCat);
+                    Log.e(TAG, "strInstructions: "+ mealInst);
+
+
+
+                    ProgressBar progressBar = theView.findViewById(R.id.progressBar);
+                    progressBar.setVisibility(View.INVISIBLE);
+                    TextView tv_test = theView.findViewById(R.id.textView2);
+                    tv_test.setText("ONLY TESTING: Meal name from API is  "+mealName);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -277,6 +346,20 @@ public class RecipePage extends Fragment {
         editor.putString(EMAIL, editTextEmail.getText().toString());
 
         editor.apply();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        Bundle passedData = getArguments();
+        idMeal = passedData.getString("idMeal");
+
+
+        String api = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + idMeal;
+        JsonFetcher fetcher = new JsonFetcher();
+        fetcher.execute(api);
+
     }
 }
 
