@@ -1,12 +1,16 @@
 package com.cst2335.recipeapp;
 
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import android.content.Context;
@@ -28,6 +32,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -138,8 +144,6 @@ public class RecipePage extends Fragment {
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
 
-
-
     }
 
     @Override
@@ -179,6 +183,7 @@ public class RecipePage extends Fragment {
         }
             return true;
     }
+
 
 
 

@@ -27,7 +27,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         //testting/
-        Log.e(TAG, " in function: " + "onCreate");
+          Log.e(TAG, " in function: " + "onCreate");
 
 
         //just did somthing
