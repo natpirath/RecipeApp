@@ -14,7 +14,7 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:subtitle="Caner Altun 1.0"
-        app:title="Favourites"
+        app:title="@string/subtitleCaner"
         app:titleTextColor="@color/design_default_color_background"
         app:subtitleTextColor="@color/design_default_color_background"/>
 

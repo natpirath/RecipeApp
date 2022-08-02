@@ -110,7 +110,7 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
             dialogBuilder.setTitle(R.string.help)
                     .setMessage(R.string.search_result_help)
-                    .setNegativeButton("Close", (click, arg) -> {})
+                    .setNegativeButton(getString(R.string.close), (click, arg) -> {})
                     .create().show();
         }); //end fab onClick
 
@@ -118,7 +118,7 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
         resultListView.setOnItemClickListener( (list, view, position, id) -> {
             // a toast message with the name of the meal clicked
             Toast.makeText(this,
-                    "Recipe for "+myAdapter.getItem(position).getMealName(),
+                    getString(R.string.recipeFor) +" "+myAdapter.getItem(position).getMealName(),
                         Toast.LENGTH_LONG).show();
             // name of the meal clicked in a bundle to be passed to a fragment
             Bundle fragmentData =new Bundle();
@@ -209,7 +209,7 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
                 InputStream response = urlConnection.getInputStream();
                 // in case we don't get any response
                 if(response == null){
-                    return "Data not fetched";
+                    return getString(R.string.dataNotFetched);
                 }
 
                 // reading the Json data:-
@@ -279,7 +279,7 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
 
                     // the count of items that will be set on the listView
                     resultCount = mealsArray.length();
-                    Toast.makeText(context, "we found "+resultCount+" results", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, getString(R.string.weFound) + " " +resultCount+ " " + getString(R.string.results), Toast.LENGTH_LONG).show();
 
 
                 } catch (Exception e) {
@@ -305,24 +305,24 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
         {
             //what to do when the menu item is selected:
             case R.id.home_item:
-                message = "You clicked on home";
+                message = getString(R.string.homeItem);
                 Intent i = new Intent (getApplicationContext(), MainActivity.class);
                 startActivity(i);
                 break;
             case R.id.cook_item:
-                message = "You clicked on cook";
+                message = getString(R.string.cookItem);
                 // this will stop the activity and start it again, instead of starting
                 // a new activity over the existent one.
                 this.finish();
                 this.startActivity(getIntent());
                 break;
             case R.id.favourites_item:
-                message = "You clicked on favourites";
+                message = getString(R.string.favoriteItem);
                 Intent iii = new Intent (getApplicationContext(), Favourites.class);
                 startActivity(iii);
                 break;
             case R.id.help_item:
-                message = "You clicked on help";
+                message = getString(R.string.helpItem);
                 break;
         }
         if ( message != null ) {

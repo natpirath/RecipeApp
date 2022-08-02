@@ -15,5 +15,22 @@
     <string name="search">Search</string>
     <string name="enter_area">enter Area</string>
     <string name="search_area">Enter an area to find recipes</string>
+    <string name="subtitleHamza">Search Page</string>
+    <string name="textOnSearchBar">search your recipes</string>
+    <string name="subtitleMajeed">Search Results</string>
+    <string name="subtitleNatalia">Recipe</string>
+    <string name="subtitleCaner">Favorites</string>
+    <string name="homeItem">You clicked on home</string>
+    <string name ="cookItem">You clicked on cook</string>
+    <string name="favoriteItem">You clicked on favourites</string>
+    <string name="helpItem">You clicked on help</string>
+    <string name="weFound">We found </string>
+    <string name="results"> results</string>
+    <string name="dataNotFetched">Data not fetched</string>
+    <string name="recipeFor">Recipe for </string>
+    <string name="emailWasSent">Email was sent</string>
+    <string name="emailWasNOTSent">Email was not sent</string>
+    <string name="recipes">Recipes</string>
+
     <string name="search_example">eg. canadian / french / italian / greek</string>
 </resources>

@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:subtitle="Hamza Khan 1.0"
         app:subtitleTextColor="@color/design_default_color_background"
-        app:title="Search Results"
+        app:title="@string/subtitleHamza"
         app:titleTextColor="@color/design_default_color_background" />
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -93,6 +93,8 @@
                     android:drawablePadding="10dp"
                     android:gravity="center_vertical"
                     android:padding="5dp"
+                    android:text="@string/textOnSearchBar"
+                    android:textSize="12sp"
                     android:text="search your recipes"
                     android:textColor="@color/white"
                     android:textSize="14sp"
