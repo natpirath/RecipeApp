@@ -31,6 +31,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,6 +62,7 @@ public class RecipePage extends Fragment {
     String emailStr;
     private EditText editTextEmail;
     private TextView description;
+    ProgressBar progressBar;
 
 
 
@@ -144,8 +146,7 @@ public class RecipePage extends Fragment {
         }); //end fab onClick
 
 
-
-        ProgressBar progressBar = recipePage.findViewById(R.id.progressBar);
+        progressBar = recipePage.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
 
@@ -300,6 +301,18 @@ public class RecipePage extends Fragment {
                     mealInst = meal.getString("strInstructions");
                     mealCat = meal.getString("strCategory");
 
+
+                    // set the text on the text views by passing the data that was fetched above
+                    TextView tv_name = theView.findViewById(R.id.mealName);
+                    TextView tv_category = theView.findViewById(R.id.CategoryName);
+                    TextView tv_instr = theView.findViewById(R.id.textView2);
+                    ImageView meal_Img = theView.findViewById(R.id.headerImage);
+
+                    tv_name.setText(mealName);
+                    tv_category.setText(mealCat);
+                    tv_instr.setText(mealInst);
+
+
                     ToggleButton favBtn = theView.findViewById(R.id.toggleButton2);
                     favBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override
@@ -321,8 +334,7 @@ public class RecipePage extends Fragment {
 
                     ProgressBar progressBar = theView.findViewById(R.id.progressBar);
                     progressBar.setVisibility(View.INVISIBLE);
-                    TextView tv_test = theView.findViewById(R.id.textView2);
-                    tv_test.setText("ONLY TESTING: Meal name from API is  "+mealName);
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
