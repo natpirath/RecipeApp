@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:subtitle="Abdul Majeed 1.0"
+        app:subtitle="Hamza Khan 1.0"
         app:subtitleTextColor="@color/design_default_color_background"
         app:title="Search Results"
         app:titleTextColor="@color/design_default_color_background" />
