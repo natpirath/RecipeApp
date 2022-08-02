@@ -338,8 +338,8 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
                 startActivity(i1);
                 break;
             case R.id.drawerResults:
-                Intent i2 = new Intent (getApplicationContext(), result_page.class);
-                startActivity(i2);
+                this.finish();
+                this.startActivity(getIntent());
                 break;
             case R.id.drawerFavourites:
                 Intent i3 = new Intent (getApplicationContext(), Favourites.class);
