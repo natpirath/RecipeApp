@@ -306,7 +306,7 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
             //what to do when the menu item is selected:
             case R.id.home_item:
                 message = "You clicked on home";
-                Intent i = new Intent (getApplicationContext(), HomePage.class);
+                Intent i = new Intent (getApplicationContext(), MainActivity.class);
                 startActivity(i);
                 break;
             case R.id.cook_item:
@@ -333,21 +333,12 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        String message = null;
-        switch (item.getItemId()){
-            case R.id.drawerHome:
-                Intent i1 = new Intent (getApplicationContext(), HomePage.class);
-                startActivity(i1);
-                break;
-            case R.id.drawerResults:
-                Intent i2 = new Intent (getApplicationContext(), result_page.class);
-                startActivity(i2);
-                break;
-            case R.id.drawerFavourites:
-                Intent i3 = new Intent (getApplicationContext(), Favourites.class);
-                startActivity(i3);
-                break;
-        }
+     Intent intent = null;
+
+     if(item.getItemId() == R.id.drawerHome){
+         Toast.makeText(this, "message", Toast.LENGTH_LONG).show();
+         return true;
+     }
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(GravityCompat.START);

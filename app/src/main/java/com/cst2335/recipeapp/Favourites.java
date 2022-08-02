@@ -140,7 +140,7 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
             //what to do when the menu item is selected:
             case R.id.home_item:
                 message = "You clicked on home";
-                Intent i = new Intent (getApplicationContext(), HomePage.class);
+                Intent i = new Intent (getApplicationContext(), MainActivity.class);
                 startActivity(i);
                 break;
             case R.id.cook_item:
@@ -170,7 +170,7 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
         String message = null;
         switch (item.getItemId()){
             case R.id.drawerHome:
-                Intent i1 = new Intent (getApplicationContext(), HomePage.class);
+                Intent i1 = new Intent (getApplicationContext(), MainActivity.class);
                 startActivity(i1);
                 break;
             case R.id.drawerResults:
