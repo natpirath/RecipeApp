@@ -1,12 +1,16 @@
 package com.cst2335.recipeapp;
 
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import android.content.ContentValues;
@@ -38,6 +42,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
@@ -50,7 +55,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 
-public class RecipePage extends Fragment {
+public class RecipePage extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
 
     final String TAG = "recipeAct";
     String idMeal, mealName, mealThumb, mealInst, mealCat;
@@ -95,6 +100,17 @@ public class RecipePage extends Fragment {
         Toolbar toolbar = recipePage.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar); //toolbar id
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //For NavigationDrawer:
+        DrawerLayout drawer = recipePage.findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(),
+                drawer, toolbar, R.string.open, R.string.close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = recipePage.findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
 
 
         //Finding Views by Id for the email Sender
@@ -200,6 +216,31 @@ public class RecipePage extends Fragment {
             Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
         }
         return true;
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        View recipePage = getView();
+        String message = null;
+        switch (item.getItemId()){
+            case R.id.drawerHome:
+                Intent i1 = new Intent (getActivity(), MainActivity.class);
+                startActivity(i1);
+                break;
+            case R.id.drawerResults:
+                Intent i2 = new Intent (getActivity(), result_page.class);
+                startActivity(i2);
+                break;
+            case R.id.drawerFavourites:
+                Intent i3 = new Intent (getActivity(), Favourites.class);
+                startActivity(i3);
+                break;
+        }
+
+        DrawerLayout drawerLayout = recipePage.findViewById(R.id.drawer_layout);
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return false;
     }
 
 

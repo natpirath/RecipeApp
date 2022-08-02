@@ -5,16 +5,9 @@
       <map>
         <entry key="..\:/AndroidProjects/RecipeApp/app/src/main/res/layout/activity_home_page.xml" value="0.1762917933130699" />
         <entry key="..\:/AndroidProjects/RecipeApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/AndroidProjects/RecipeApp/app/src/main/res/layout/activity_recipe_page.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/RecipeApp/app/src/main/res/layout/activity_recipe_page.xml" value="0.20244565217391305" />
         <entry key="..\:/AndroidProjects/RecipeApp/app/src/main/res/layout/activity_result_page.xml" value="0.1" />
         <entry key="..\:/AndroidProjects/RecipeApp/app/src/main/res/layout/recipes_list_card.xml" value="0.33" />
-        <entry key="..\:/Users/caner/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/activity_favourites.xml" value="0.1" />
-        <entry key="..\:/Users/caner/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/caner/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/activity_recipe_page.xml" value="0.1" />
-        <entry key="..\:/Users/caner/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/activity_result_page.xml" value="0.1" />
-        <entry key="..\:/Users/caner/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/favourites_list_card.xml" value="0.20599409033347404" />
-        <entry key="..\:/Users/caner/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/recipes_list_card.xml" value="0.1" />
-        <entry key="..\:/Users/caner/AndroidStudioProjects/RecipeApp/app/src/main/res/menu/activity_menu.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_star_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_star_border_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/toggle_selector.xml" value="0.1" />
