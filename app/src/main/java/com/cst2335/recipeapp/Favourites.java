@@ -45,7 +45,7 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
     SQLiteDatabase theDatabase;
 
     //MyListAdapter myAdapter;
-   // Button send, receive;
+   // Button btn;
     ListView listView;
     MyListAdapter myAdapter;
     //ListView resultListView;
@@ -61,7 +61,9 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourites);
 
-
+        progressBar = findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
         //initialize it in onCreate
         myOpener = new MyOpenHelper( this );
         //open the database:
@@ -107,18 +109,34 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
         navigationView.setNavigationItemSelectedListener(this);
 
         listView.setOnItemClickListener( (list, view, position, id) -> {
-            // a toast message with the name of the meal clicked
-            Toast.makeText(this,
-                    "Recipe for "+myAdapter.getItem(position).getMealName(),
-                    Toast.LENGTH_SHORT).show();
 
-            // name of the meal clicked in a bundle to be passed to a fragment
-            Bundle fragmentData =new Bundle();
-            fragmentData.putString("idMeal", myAdapter.getItem(position).getIdMeal());
+            String theMealID = myAdapter.getItem(position).getIdMeal();
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+            dialogBuilder.setTitle(R.string.makeChoice)
+                    .setMessage(R.string.detailsOrRemove)
+                            .setPositiveButton(R.string.seeDetails, (click, arg) ->{
+                                // a toast message with the name of the meal clicked
+                                Toast.makeText(this,
+                                        "Recipe for "+myAdapter.getItem(position).getMealName(),
+                                        Toast.LENGTH_SHORT).show();
 
-            Intent recipeFrag = new Intent(this, FragmentContainer.class);
-            recipeFrag.putExtras(fragmentData);
-            startActivity(recipeFrag);
+                                // name of the meal clicked in a bundle to be passed to a fragment
+                                Bundle fragmentData =new Bundle();
+                                fragmentData.putString("idMeal", theMealID);
+
+                                Intent recipeFrag = new Intent(this, FragmentContainer.class);
+                                recipeFrag.putExtras(fragmentData);
+                                startActivity(recipeFrag);
+                            })
+                    .setNegativeButton(R.string.removeItem, (click, arg)->{
+                        detailsList.remove(position);
+                        myAdapter.notifyDataSetChanged();
+                        theDatabase.delete(MyOpenHelper.TABLE_NAME, "_id=?",
+                                new String[]{theMealID});
+
+                    })
+                    .create().show();
+
         });
 
     }
@@ -155,9 +173,7 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
                 this.finish();
                 this.startActivity(getIntent());
                 break;
-            case R.id.help_item:
-                message = getString(R.string.helpItem);
-                break;
+
         }
         if ( message != null ) {
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
@@ -228,16 +244,18 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
             LayoutInflater inflater = getLayoutInflater();
 
             //make a new row:
-            View newView = inflater.inflate(R.layout.recipes_list_card, parent, false);
+            View newView = inflater.inflate(R.layout.favourites_list_card, parent, false);
 
             //set what the text should be in this layout's text views:
-            recipeName = newView.findViewById(R.id.tv_meal_name);
+            recipeName = newView.findViewById(R.id.tv_meal_name_fav);
             recipeName.setText( getItem(position).getMealName() );
+
+
 
 
             // set the background image of the cardView "the meal image"
             String url = getItem(position).getMealImage();
-            thumbnail = newView.findViewById(R.id.meal_img);
+            thumbnail = newView.findViewById(R.id.meal_img_fav);
             // using Glide library we can load an image form a url into an imageView
             // placeholder is what shows while the image is loading
             Glide.with(newView)

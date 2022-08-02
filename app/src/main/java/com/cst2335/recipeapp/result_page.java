@@ -321,9 +321,7 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
                 Intent iii = new Intent (getApplicationContext(), Favourites.class);
                 startActivity(iii);
                 break;
-            case R.id.help_item:
-                message = getString(R.string.helpItem);
-                break;
+
         }
         if ( message != null ) {
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
@@ -333,16 +331,25 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-     Intent intent = null;
-
-     if(item.getItemId() == R.id.drawerHome){
-         Toast.makeText(this, "message", Toast.LENGTH_LONG).show();
-         return true;
-     }
+        String message = null;
+        switch (item.getItemId()){
+            case R.id.drawerHome:
+                Intent i1 = new Intent (getApplicationContext(), MainActivity.class);
+                startActivity(i1);
+                break;
+            case R.id.drawerResults:
+                Intent i2 = new Intent (getApplicationContext(), result_page.class);
+                startActivity(i2);
+                break;
+            case R.id.drawerFavourites:
+                Intent i3 = new Intent (getApplicationContext(), Favourites.class);
+                startActivity(i3);
+                break;
+        }
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
+        return false;
     }
 
 
