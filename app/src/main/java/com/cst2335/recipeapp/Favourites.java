@@ -13,6 +13,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.SystemClock;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -53,13 +56,22 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
     TextView recipeName; //text view to set its text
     ImageView thumbnail;
     String mealName, mealThumb, idMeal, area;
-    ProgressBar progressBar;
+    ProgressBar mProgressBar;
     Context context = this;
+    CountDownTimer mCountDownTimer;
+    int i=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourites);
+
+        mProgressBar = findViewById(R.id.progressbar);
+        mProgressBar.setVisibility(View.VISIBLE);
+
+
+        mProgressBar.setVisibility(View.INVISIBLE);
+
 
 
         //initialize it in onCreate
@@ -90,8 +102,6 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
         myAdapter.notifyDataSetChanged();
 
 
-
-
         // Get reference of widgets from XML layout
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
@@ -105,6 +115,7 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
     }
 
@@ -175,6 +186,7 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
 
     private class MyListAdapter extends BaseAdapter {
 
+
         /**
          * when called will return the total number of objects in the list.
          * uses the array list which contains the Detail Objects i.e. the number of view cards on screen.
@@ -188,7 +200,7 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
          * @param position index of the object to be displayed.
          * @return the object that will be displayed.
          */
-        public Meals getItem(int position) { return detailsList.get(position); }
+        public Meals getItem(int position) { return detailsList.get(position);}
 
         /**
          * this function used to get the database ID of the object in the database.
@@ -196,6 +208,7 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
          * @return database ID of the Detail object
          */
         public long getItemId(int position) {
+
             // for now it will only return the position on the list because we don't have database yet.
             return (long) position;
         }
@@ -208,19 +221,19 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
          */
         public View getView(int position, View old, ViewGroup parent)
         {
+
             LayoutInflater inflater = getLayoutInflater();
 
             //make a new row:
-            View newView = inflater.inflate(R.layout.recipes_list_card, parent, false);
+            View newView = inflater.inflate(R.layout.favourites_list_card, parent, false);
 
             //set what the text should be in this layout's text views:
-            recipeName = newView.findViewById(R.id.tv_meal_name);
+            recipeName = newView.findViewById(R.id.tv_meal_name_fav);
             recipeName.setText( getItem(position).getMealName() );
-
 
             // set the background image of the cardView "the meal image"
             String url = getItem(position).getMealImage();
-            thumbnail = newView.findViewById(R.id.meal_img);
+            thumbnail = newView.findViewById(R.id.meal_img_fav);
             // using Glide library we can load an image form a url into an imageView
             // placeholder is what shows while the image is loading
             Glide.with(newView)
@@ -229,7 +242,11 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
 
             //return it to be put in the table
             return newView;
+
         }
+
     }// end myListAdapter
+
+
 
 }
