@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <item
-        android:id="@+id/help_item"
-        android:icon="@android:drawable/ic_menu_help"
-        android:orderInCategory="200"
-        android:title="@string/help"
-        app:showAsAction="ifRoom"/> <!-- This uses showAsAction=never, so look at title= parameter -->
 
     <item
         android:id="@+id/favourites_item"

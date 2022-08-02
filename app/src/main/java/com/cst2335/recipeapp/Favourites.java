@@ -112,9 +112,9 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
 
             String theMealID = myAdapter.getItem(position).getIdMeal();
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-            dialogBuilder.setTitle("Make a choice")
-                    .setMessage("Do you want to see the details or remove from favorites?")
-                            .setPositiveButton("See Details", (click, arg) ->{
+            dialogBuilder.setTitle(R.string.makeChoice)
+                    .setMessage(R.string.detailsOrRemove)
+                            .setPositiveButton(R.string.seeDetails, (click, arg) ->{
                                 // a toast message with the name of the meal clicked
                                 Toast.makeText(this,
                                         "Recipe for "+myAdapter.getItem(position).getMealName(),
@@ -128,7 +128,7 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
                                 recipeFrag.putExtras(fragmentData);
                                 startActivity(recipeFrag);
                             })
-                    .setNegativeButton("Remove", (click, arg)->{
+                    .setNegativeButton(R.string.removeItem, (click, arg)->{
                         detailsList.remove(position);
                         myAdapter.notifyDataSetChanged();
                         theDatabase.delete(MyOpenHelper.TABLE_NAME, "_id=?",
@@ -173,9 +173,7 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
                 this.finish();
                 this.startActivity(getIntent());
                 break;
-            case R.id.help_item:
-                message = getString(R.string.helpItem);
-                break;
+
         }
         if ( message != null ) {
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();

@@ -31,5 +31,10 @@
     <string name="emailWasSent">Email was sent</string>
     <string name="emailWasNOTSent">Email was not sent</string>
     <string name="recipes">Recipes</string>
+    <string name="makeChoice">Make a choice</string>
+    <string name="detailsOrRemove">Do you want to see the details or remove from favorites?</string>
+    <string name="seeDetails">See Details</string>
+    <string name="removeItem">Remove</string>
+
     <string name="search_example">eg. canadian / french / italian / greek</string>
 </resources>
