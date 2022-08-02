@@ -1,16 +1,12 @@
 package com.cst2335.recipeapp;
 
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import android.content.ContentValues;
@@ -38,8 +34,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.material.navigation.NavigationView;
 import android.widget.ToggleButton;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -122,7 +116,7 @@ public class RecipePage extends Fragment {
             @Override
             public void onClick(View v) {
 
-               Snackbar snackbar = Snackbar
+                Snackbar snackbar = Snackbar
                         .make(constraintLayout, "Email was sent", Snackbar.LENGTH_LONG)
                         .setAction("UNDO", new View.OnClickListener() {
                             @Override
@@ -205,7 +199,7 @@ public class RecipePage extends Fragment {
         if ( message != null ) {
             Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
         }
-            return true;
+        return true;
     }
 
 
