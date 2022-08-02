@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
+import com.bumptech.glide.Glide;
 import com.cst2335.recipeapp.model.MyOpenHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -311,6 +312,11 @@ public class RecipePage extends Fragment {
                     tv_name.setText(mealName);
                     tv_category.setText(mealCat);
                     tv_instr.setText(mealInst);
+                    // using Glide library we can load an image form a url into an imageView
+                    // placeholder is what shows while the image is loading
+                    Glide.with(theView)
+                            .load(mealThumb)
+                            .into(meal_Img);
 
 
                     ToggleButton favBtn = theView.findViewById(R.id.toggleButton2);
