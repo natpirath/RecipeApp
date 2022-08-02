@@ -15,4 +15,5 @@
     <string name="search">Search</string>
     <string name="enter_area">enter Area</string>
     <string name="search_area">Enter an area to find recipes</string>
+    <string name="search_example">eg. canadian / french / italian / greek</string>
 </resources>
