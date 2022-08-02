@@ -7,7 +7,7 @@
         android:id="@+id/help_item"
         android:icon="@android:drawable/ic_menu_help"
         android:orderInCategory="200"
-        android:title="help"
+        android:title="@string/help"
         app:showAsAction="ifRoom"/> <!-- This uses showAsAction=never, so look at title= parameter -->
 
     <item
@@ -27,7 +27,7 @@
         android:id="@+id/cook_item"
         android:orderInCategory="100"
         android:icon="@drawable/cookicon"
-        android:title="recipes"
+        android:title="@string/recipes"
         app:showAsAction="ifRoom"/>
 
 

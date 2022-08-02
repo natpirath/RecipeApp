@@ -139,24 +139,24 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
         {
             //what to do when the menu item is selected:
             case R.id.home_item:
-                message = "You clicked on home";
+                message = getString(R.string.homeItem);
                 Intent i = new Intent (getApplicationContext(), MainActivity.class);
                 startActivity(i);
                 break;
             case R.id.cook_item:
-                message = "You clicked on cook";
+                message = getString(R.string.cookItem);
                 Intent ii = new Intent (getApplicationContext(), result_page.class);
                 startActivity(ii);
                 break;
             case R.id.favourites_item:
-                message = "You clicked on favourites";
+                message = getString(R.string.favoriteItem);
                 // this will stop the activity and start it again, instead of starting
                 // a new activity over the existent one.
                 this.finish();
                 this.startActivity(getIntent());
                 break;
             case R.id.help_item:
-                message = "You clicked on help";
+                message = getString(R.string.helpItem);
                 break;
         }
         if ( message != null ) {

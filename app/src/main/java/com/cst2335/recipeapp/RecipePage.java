@@ -120,11 +120,11 @@ public class RecipePage extends Fragment {
             public void onClick(View v) {
 
                 Snackbar snackbar = Snackbar
-                        .make(constraintLayout, "Email was sent", Snackbar.LENGTH_LONG)
+                        .make(constraintLayout, getString(R.string.emailWasSent), Snackbar.LENGTH_LONG)
                         .setAction("UNDO", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Snackbar snackbar = Snackbar.make(constraintLayout, "Email wasn't sent", Snackbar.LENGTH_SHORT);
+                                Snackbar snackbar = Snackbar.make(constraintLayout, getString(R.string.emailWasNOTSent), Snackbar.LENGTH_SHORT);
                                 snackbar.show();
                             }
                         });
@@ -142,7 +142,7 @@ public class RecipePage extends Fragment {
             // TODO: change the message of the help to show instructions of how to use this activity
             builder.setTitle(R.string.help)
                     .setMessage(R.string.search_result_help)
-                    .setNegativeButton("Close", (click, arg) -> {})
+                    .setNegativeButton(getString(R.string.close), (click, arg) -> {})
                     .create().show();
         }); //end fab onClick
 
@@ -180,22 +180,22 @@ public class RecipePage extends Fragment {
         {
             //what to do when the menu item is selected:
             case R.id.home_item:
-                message = "You clicked on home";
+                message = getString(R.string.homeItem);
                 Intent i = new Intent (getActivity(), MainActivity.class);
                 startActivity(i);
                 break;
             case R.id.cook_item:
-                message = "You clicked on cook";
+                message = getString(R.string.cookItem);
                 Intent ii = new Intent (getActivity(), result_page.class);
                 startActivity(ii);
                 break;
             case R.id.favourites_item:
-                message = "You clicked on favourites";
+                message = getString(R.string.favoriteItem);
                 Intent iii = new Intent (getActivity(), Favourites.class);
                 startActivity(iii);
                 break;
             case R.id.help_item:
-                message = "You clicked on help";
+                message = getString(R.string.helpItem);
                 break;
         }
         if ( message != null ) {

@@ -22,4 +22,14 @@
     <string name="subtitleNatalia">Receitas</string>
     <string name="subtitleCaner">Favoritos</string>
     <string name="homeItem">Voce clicou na pagina inicial</string>
+    <string name ="cookItem">Voce clicou em receitas</string>
+    <string name="favoriteItem">Voce clicou em favoritos</string>
+    <string name="helpItem">Voce clicou em ajuda</string>
+    <string name="weFound">Encontramos </string>
+    <string name="results"> resultados</string>
+    <string name="dataNotFetched">Dados não encontrados</string>
+    <string name="recipeFor">Receita para </string>
+    <string name="emailWasSent">Email foi enviado</string>
+    <string name="emailWasNOTSent">Email não foi enviado</string>
+    <string name="recipes">Receitas</string>
 </resources>
