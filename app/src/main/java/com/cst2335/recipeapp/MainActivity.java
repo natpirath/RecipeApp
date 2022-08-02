@@ -152,8 +152,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String message = null;
         switch (item.getItemId()){
             case R.id.drawerHome:
-                Intent i1 = new Intent (getApplicationContext(), MainActivity.class);
-                startActivity(i1);
+                this.finish();
+                this.startActivity(getIntent());
                 break;
             case R.id.drawerResults:
                 Intent i2 = new Intent (getApplicationContext(), result_page.class);

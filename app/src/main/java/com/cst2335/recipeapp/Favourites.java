@@ -194,8 +194,8 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
                 startActivity(i2);
                 break;
             case R.id.drawerFavourites:
-                Intent i3 = new Intent (getApplicationContext(), Favourites.class);
-                startActivity(i3);
+                this.finish();
+                this.startActivity(getIntent());
                 break;
         }
 
