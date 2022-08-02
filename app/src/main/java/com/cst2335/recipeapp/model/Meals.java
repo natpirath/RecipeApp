@@ -14,6 +14,8 @@ public class Meals {
     ArrayList<String> ingredients = new ArrayList<>();
     ArrayList<String> measurements = new ArrayList<>();
 
+
+    public Meals(){};
     /**
      * constructor for fetching Json by filtering area
      * @param idMeal

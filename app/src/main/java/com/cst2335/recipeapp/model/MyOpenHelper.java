@@ -1,24 +1,20 @@
 package com.cst2335.recipeapp.model;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class MyOpenHelper extends SQLiteOpenHelper {
-    public static final String databaseName = "MealDatabase";
+    public static final String DATABASE = "MealDatabase";
     public static final int version = 1;
     public static final String TABLE_NAME = "Meal";
     public static final String COL_ID = "_id";
     public static final String COL_MEAL_NAME = "MealName";
     public static final String COL_IMAGE = "Image";
-   // public static final String FAVORITE_STATUS = "fStatus";
 
     public MyOpenHelper(Context context) {
 
-        super(context, databaseName, null, version);
+        super(context, DATABASE, null, version);
     }
 
     @Override
@@ -28,7 +24,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
 
         //                                      //TABLE_NAME               take care of id numbers
         db.execSQL( String.format( "Create table %s ( %s INTEGER PRIMARY KEY, %s TEXT, %s  TEXT);"
-                , TABLE_NAME, COL_ID, COL_MEAL_NAME, COL_IMAGE) );
+                , TABLE_NAME, COL_ID, COL_MEAL_NAME, COL_IMAGE ) );
     }
 
     @Override
@@ -38,8 +34,4 @@ public class MyOpenHelper extends SQLiteOpenHelper {
 
         this.onCreate(db); //calls function on line 26
     }
-
-
-
-
 }

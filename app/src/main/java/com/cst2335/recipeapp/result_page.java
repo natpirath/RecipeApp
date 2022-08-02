@@ -11,6 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.cst2335.recipeapp.model.Meals;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +30,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.cst2335.recipeapp.model.Meals;
+import com.cst2335.recipeapp.model.MyOpenHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
@@ -99,6 +101,7 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
         /* to fetch the data from the api */
         fetch = new JsonFetcher();
         fetch.execute(api);
+
 
 
         // FAB when clicked will show AlertDialog with "help" instructions on how to use the layout
@@ -267,6 +270,7 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
                         mealName = oneMeal.getString("strMeal");
                         mealThumb = oneMeal.getString("strMealThumb");
                         idMeal = oneMeal.getString("idMeal");
+
 
                         detailsList.add(new Meals(idMeal, mealName, mealThumb));
                         myAdapter.notifyDataSetChanged();
