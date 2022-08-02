@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -22,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:subtitle="Natalia Pirath 1.0"
         app:subtitleTextColor="@color/design_default_color_background"
-        app:title="Recipe"
+        app:title="@string/subtitleNatalia"
         app:titleTextColor="@color/design_default_color_background" />
 
 
@@ -100,6 +106,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
@@ -117,6 +124,7 @@
         app:layout_constraintBottom_toTopOf="@+id/EmailSenderHeader"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/categoryHeader" />
+
 
     <ToggleButton
         android:id="@+id/toggleButton2"
@@ -168,3 +176,4 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

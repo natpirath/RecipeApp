@@ -15,4 +15,10 @@
     <string name="search">Search</string>
     <string name="enter_area">enter Area</string>
     <string name="search_area">Enter an area to find recipes</string>
+    <string name="subtitleHamza">Search Page</string>
+    <string name="textOnSearchBar">search your recipes</string>
+    <string name="subtitleMajeed">Search Results</string>
+    <string name="subtitleNatalia">Recipe</string>
+    <string name="subtitleCaner">Favorites</string>
+    <string name="homeItem">You clicked on home</string>
 </resources>

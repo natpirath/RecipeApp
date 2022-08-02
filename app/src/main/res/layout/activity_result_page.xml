@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:subtitle="Abdul Majeed 1.0"
         app:subtitleTextColor="@color/design_default_color_background"
-        app:title="Search Results"
+        app:title="@string/subtitleMajeed"
         app:titleTextColor="@color/design_default_color_background" />
 
         <androidx.drawerlayout.widget.DrawerLayout
