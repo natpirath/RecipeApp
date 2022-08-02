@@ -29,6 +29,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -300,23 +301,23 @@ public class RecipePage extends Fragment {
                     mealCat = meal.getString("strCategory");
 
                     ToggleButton favBtn = theView.findViewById(R.id.toggleButton2);
-                    favBtn.setOnClickListener( clickFav -> {
-                        Log.e(TAG, "added to favorite: "+mealName);
-                        newRow.put(MyOpenHelper.COL_ID, idMeal);
-                        newRow.put(MyOpenHelper.COL_MEAL_NAME, mealName);
-                        newRow.put(MyOpenHelper.COL_IMAGE, mealThumb);
+                    favBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                            Log.e(TAG, "added to favorite: "+mealName);
+                            newRow.put(MyOpenHelper.COL_ID, idMeal);
+                            newRow.put(MyOpenHelper.COL_MEAL_NAME, mealName);
+                            newRow.put(MyOpenHelper.COL_IMAGE, mealThumb);
 
-                        theDatabase.insert(MyOpenHelper.TABLE_NAME, null, newRow);
-
+                            if(isChecked){
+                                theDatabase.insert(MyOpenHelper.TABLE_NAME, null, newRow);
+                            }
+                            else {
+                                theDatabase.delete(MyOpenHelper.TABLE_NAME, "_id=?",
+                                        new String[]{idMeal});
+                            }
+                        }
                     });
-
-                    Log.e(TAG, "meal name: "+ mealName);
-                    Log.e(TAG, "image URL: "+ mealThumb);
-                    Log.e(TAG, "idMeal: "+ idMeal);
-                    Log.e(TAG, "strCategory: "+ mealCat);
-                    Log.e(TAG, "strInstructions: "+ mealInst);
-
-
 
                     ProgressBar progressBar = theView.findViewById(R.id.progressBar);
                     progressBar.setVisibility(View.INVISIBLE);
