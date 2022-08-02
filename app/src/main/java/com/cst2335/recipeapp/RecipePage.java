@@ -194,9 +194,7 @@ public class RecipePage extends Fragment {
                 Intent iii = new Intent (getActivity(), Favourites.class);
                 startActivity(iii);
                 break;
-            case R.id.help_item:
-                message = getString(R.string.helpItem);
-                break;
+
         }
         if ( message != null ) {
             Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
