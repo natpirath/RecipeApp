@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:subtitle="Natalia Pirath 1.0"
             app:subtitleTextColor="@color/design_default_color_background"
-            app:title="Recipe"
+            app:title="@string/subtitleNatalia"
             app:titleTextColor="@color/design_default_color_background" />
 
 

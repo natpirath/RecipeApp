@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Aplicativo de Receitas</string>
+    <string name="SendToEmailButton">Enviar</string>
+    <string name="EmailSenderHeader">Enviar a receita para o seu e-mail </string>
+    <string name="categoryHeader">Categorias: </string>
+    <string name="help">Ajuda</string>
+    <string name="search_result_help">Esse é o resultado da sua busca,
+                                    clique em qualquer receita para ver os detalhes ,
+                                    você pode ir a pagina de favoritos clicando no botão de estrela
+                                    na barra de ferramentas ou na gaveta de navegação.</string>
+    <string name="search_help">Essa é a sua página de receitas. Para começar, escreva o nome de um país que você queira ver as receitas. Por ultimo clique em buscar.</string>
+    <string name="not_fetched">Erro: Dado não encontrado. </string>
+    <string name="open">Abrir</string>
+    <string name="close">Fechar</string>
+    <string name="search">Buscar</string>
+    <string name="enter_area">Escreva o País</string>
+    <string name="search_area">Escreva o nome do país para buscar as receitas</string>
+    <string name="subtitleHamza">Pagina de busca</string>
+    <string name="textOnSearchBar">busque receitas</string>
+    <string name="subtitleMajeed">Resultados da busca</string>
+    <string name="subtitleNatalia">Receitas</string>
+    <string name="subtitleCaner">Favoritos</string>
+    <string name="homeItem">Voce clicou na pagina inicial</string>
+    <string name ="cookItem">Voce clicou em receitas</string>
+    <string name="favoriteItem">Voce clicou em favoritos</string>
+    <string name="helpItem">Voce clicou em ajuda</string>
+    <string name="weFound">Encontramos </string>
+    <string name="results"> resultados</string>
+    <string name="dataNotFetched">Dados não encontrados</string>
+    <string name="recipeFor">Receita para </string>
+    <string name="emailWasSent">Email foi enviado</string>
+    <string name="emailWasNOTSent">Email não foi enviado</string>
+    <string name="recipes">Receitas</string>
+</resources>

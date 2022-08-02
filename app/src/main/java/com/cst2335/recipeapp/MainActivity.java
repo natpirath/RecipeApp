@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
             dialogBuilder.setTitle(R.string.help)
                     .setMessage(R.string.search_help)
-                    .setNegativeButton("Close", (click, arg) -> {})
+                    .setNegativeButton(getString(R.string.close), (click, arg) -> {})
                     .create().show();
         }); //end fab onClick
 
@@ -100,24 +100,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             //what to do when the menu item is selected:
             case R.id.home_item:
-                message = "You clicked on home";
+                message = getString(R.string.homeItem);
                 // this will stop the activity and start it again, instead of starting
                 // a new activity over the existent one.
                 this.finish();
                 this.startActivity(getIntent());
                 break;
             case R.id.cook_item:
-                message = "You clicked on cook";
+                message = getString(R.string.cookItem);
                 Intent ii = new Intent (getApplicationContext(), result_page.class);
                 startActivity(ii);
                 break;
             case R.id.favourites_item:
-                message = "You clicked on favourites";
+                message = getString(R.string.favoriteItem);
                 Intent iii = new Intent (getApplicationContext(), Favourites.class);
                 startActivity(iii);
                 break;
             case R.id.help_item:
-                message = "You clicked on help";
+                message = getString(R.string.helpItem);
                 break;
         }
         if ( message != null ) {
