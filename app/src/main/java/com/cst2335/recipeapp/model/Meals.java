@@ -9,7 +9,8 @@ public class Meals {
     String category;
     String area;
     String instructions;
-    String mealThumb;
+    String mealImage;
+    String favStatus;
     ArrayList<String> ingredients = new ArrayList<>();
     ArrayList<String> measurements = new ArrayList<>();
 
@@ -19,12 +20,18 @@ public class Meals {
      * constructor for fetching Json by filtering area
      * @param idMeal
      * @param mealName
-     * @param mealThumb
+     * @param mealImage
      */
-    public Meals(String idMeal, String mealName, String mealThumb) {
+    public Meals(String idMeal, String mealName, String mealImage, String favStatus) {
         this.idMeal = idMeal;
         this.mealName = mealName;
-        this.mealThumb = mealThumb;
+        this.mealImage = mealImage;
+        this.favStatus = favStatus;
+    }
+    public Meals(String idMeal, String mealName, String mealImage) {
+        this.idMeal = idMeal;
+        this.mealName = mealName;
+        this.mealImage = mealImage;
     }
 
     /**
@@ -34,17 +41,17 @@ public class Meals {
      * @param category
      * @param area
      * @param instructions
-     * @param mealThumb
+     * @param mealImage
      * @param ingredients
      * @param measurements
      */
-    public Meals(String idMeal, String mealName, String category, String area, String instructions, String mealThumb, ArrayList<String> ingredients, ArrayList<String> measurements) {
+    public Meals(String idMeal, String mealName, String category, String area, String instructions, String mealImage, ArrayList<String> ingredients, ArrayList<String> measurements) {
         this.idMeal = idMeal;
         this.mealName = mealName;
         this.category = category;
         this.area = area;
         this.instructions = instructions;
-        this.mealThumb = mealThumb;
+        this.mealImage = mealImage;
         this.ingredients = ingredients;
         this.measurements = measurements;
     }
@@ -65,8 +72,11 @@ public class Meals {
     public String getInstructions() {
         return instructions;
     }
-    public String getMealThumb() {
-        return mealThumb;
+    public String getMealImage() {
+        return mealImage;
+    }
+    public String getFavStatus() {
+        return favStatus;
     }
     public ArrayList<String> getIngredients() {
         return ingredients;
@@ -88,11 +98,14 @@ public class Meals {
     public void setArea(String area) {
         this.area = area;
     }
+    public void setFavStatus(String favStatus) {
+        this.favStatus = favStatus;
+    }
     public void setInstructions(String instructions) {
         this.instructions = instructions;
     }
-    public void setMealThumb(String mealThumb) {
-        this.mealThumb = mealThumb;
+    public void setMealImage(String mealImage) {
+        this.mealImage = mealImage;
     }
     public void setIngredients(ArrayList<String> ingredients) {
         this.ingredients = ingredients;

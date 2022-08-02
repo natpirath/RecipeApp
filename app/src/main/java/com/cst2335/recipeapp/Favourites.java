@@ -8,17 +8,30 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.cst2335.recipeapp.model.Meals;
+import com.cst2335.recipeapp.model.MyOpenHelper;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -28,14 +41,58 @@ import java.util.List;
 public class Favourites extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
 //---
+    MyOpenHelper myOpener;
+    SQLiteDatabase theDatabase;
+
+    //MyListAdapter myAdapter;
+   // Button send, receive;
+    ListView listView;
+    MyListAdapter myAdapter;
+    //ListView resultListView;
+    ArrayList<Meals> detailsList = new ArrayList<>(); //Detail object Array to store info of the list item
+    TextView recipeName; //text view to set its text
+    ImageView thumbnail;
+    String mealName, mealThumb, idMeal, area;
+    ProgressBar progressBar;
+    Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourites);
 
+
+        //initialize it in onCreate
+        myOpener = new MyOpenHelper( this );
+        //open the database:
+        theDatabase = myOpener.getWritableDatabase();
+
+        Cursor results = theDatabase.rawQuery( "Select * from " + MyOpenHelper.TABLE_NAME + ";", null );//no arguments to the query
+
+
+        listView = findViewById(R.id.listView);
+        listView.setAdapter(myAdapter = new MyListAdapter());
+
+        //Convert column names to indices:
+        int idIndex = results.getColumnIndex( MyOpenHelper.COL_ID );
+        int  mealNameIndex = results.getColumnIndex( MyOpenHelper.COL_MEAL_NAME);
+        int mealImageIndex = results.getColumnIndex( MyOpenHelper.COL_IMAGE);
+
+        //cursor is pointing to row -1
+        while( results.moveToNext() ) //returns false if no more data
+        { //pointing to row 2
+            String id = results.getString(idIndex);
+            String mealName = results.getString( mealNameIndex );
+            String mealImage = results.getString(mealImageIndex);
+
+            detailsList.add(new Meals(id, mealName, mealImage));
+        }
+        myAdapter.notifyDataSetChanged();
+
+
+
+
         // Get reference of widgets from XML layout
-        final ListView listView = (ListView) findViewById(R.id.listView);
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
 
@@ -48,78 +105,6 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
-
-        // Initializing a new String Array
-        String[] fruits = new String[] {
-                "Poutine - Canadian!",
-                "Butter Chicken - Indian!"
-        };
-
-        // Create a List from String Array elements
-        final List<String> fruits_list = new ArrayList<String>(Arrays.asList(fruits));
-
-        // Create an ArrayAdapter from List
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_list_item_1, fruits_list);
-
-        // DataBind ListView with items from ArrayAdapter
-        listView.setAdapter(arrayAdapter);
-
-
-
-
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
-                String whatWasClicked = fruits_list.get(position);
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Favourites.this);
-                alertDialogBuilder.setTitle("Make a choice")
-
-                        //What is the message:
-                        .setMessage("Do you want to delete this?")
-
-                        //what the Yes button does:
-                        .setPositiveButton("Yes", (click, arg) -> {
-                            fruits_list.remove(position);
-
-                            //elements.remove(elements.size() - 1);
-                            //myAdapter.notifyItemRemoved();
-                            arrayAdapter.notifyDataSetChanged();
-
-                            /*Snackbar.make(null, "You removed " + position, Snackbar.LENGTH_SHORT)
-                                    .setAction("Undo", (click2)-> {
-                                fruits_list.add(position, whatWasClicked);
-                                arrayAdapter.notifyDataSetChanged();
-                            }).show();*/
-
-                        })
-                        //What the No button does:
-                        .setNegativeButton("No", (click, arg) -> {
-
-                        })
-
-                        //An optional third button:
-                        .setNeutralButton("Maybe", (click, arg) -> {
-                        }).show();
-                return true;
-            }
-        });
-
-        listView.setOnItemClickListener((list, view, position, id) -> {
-            Bundle dataToPass = new Bundle();
-            dataToPass.putString("item", fruits_list.get(position));
-
-            Toast.makeText(Favourites.this, getResources().getString(Integer.parseInt("R.string.favourites_toast")), Toast.LENGTH_SHORT).show();
-
-
-
-            //Intent detailedActivity = new Intent(this, EmptyActivity.class);
-            //detailedActivity.putExtras(dataToPass);
-            //startActivity(detailedActivity, dataToPass);
-        });
 
     }
 
@@ -187,5 +172,64 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
         drawerLayout.closeDrawer(GravityCompat.START);
         return false;
     }
+
+    private class MyListAdapter extends BaseAdapter {
+
+        /**
+         * when called will return the total number of objects in the list.
+         * uses the array list which contains the Detail Objects i.e. the number of view cards on screen.
+         * @return the total number of Detail Objects, size of the arrayList.
+         */
+        public int getCount() { return detailsList.size();}
+
+        /**
+         * This function to be called in the getView function, used to get the
+         * object at the position passed needed to be displayed. Uses the ArrayList.
+         * @param position index of the object to be displayed.
+         * @return the object that will be displayed.
+         */
+        public Meals getItem(int position) { return detailsList.get(position); }
+
+        /**
+         * this function used to get the database ID of the object in the database.
+         * @param position index of the item in the details ArrayList
+         * @return database ID of the Detail object
+         */
+        public long getItemId(int position) {
+            // for now it will only return the position on the list because we don't have database yet.
+            return (long) position;
+        }
+
+        /**
+         * used to list the items in the listView by inflating a layout and also edit any view in this layout
+         * it inflates the recipes_list_card then gets the recipe name and category and sets them
+         * in the corresponding text views.
+         * @return the inflated view to be displayed in the listView
+         */
+        public View getView(int position, View old, ViewGroup parent)
+        {
+            LayoutInflater inflater = getLayoutInflater();
+
+            //make a new row:
+            View newView = inflater.inflate(R.layout.recipes_list_card, parent, false);
+
+            //set what the text should be in this layout's text views:
+            recipeName = newView.findViewById(R.id.tv_meal_name);
+            recipeName.setText( getItem(position).getMealName() );
+
+
+            // set the background image of the cardView "the meal image"
+            String url = getItem(position).getMealImage();
+            thumbnail = newView.findViewById(R.id.meal_img);
+            // using Glide library we can load an image form a url into an imageView
+            // placeholder is what shows while the image is loading
+            Glide.with(newView)
+                    .load(url)
+                    .into(thumbnail);
+
+            //return it to be put in the table
+            return newView;
+        }
+    }// end myListAdapter
 
 }
