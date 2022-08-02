@@ -31,6 +31,5 @@
     <string name="emailWasSent">Email was sent</string>
     <string name="emailWasNOTSent">Email was not sent</string>
     <string name="recipes">Recipes</string>
-
     <string name="search_example">eg. canadian / french / italian / greek</string>
 </resources>
