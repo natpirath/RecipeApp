@@ -11,12 +11,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DrawerLayout drawer;
     NavigationView navigationView;
     ArrayList<Integer> randomImages = new ArrayList<Integer>();
+    ProgressBar progressBar;
 
 
     @Override
@@ -52,6 +56,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .setNegativeButton(getString(R.string.close), (click, arg) -> {})
                     .create().show();
         }); //end fab onClick
+
+
+        /* progress bar is visible on screen */
+        progressBar = findViewById(R.id.SR_progressbar);
+        progressBar.setVisibility(View.INVISIBLE);
 
         // storing images in a list to show them randomly as a header image in the activity
         randomImages.add(R.drawable.p1);
