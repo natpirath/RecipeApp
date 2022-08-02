@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class MyOpenHelper extends SQLiteOpenHelper {
-    public static final String filename = "MealDatabase";
+    public static final String DATABASE = "MealDatabase";
     public static final int version = 1;
     public static final String TABLE_NAME = "Meal";
     public static final String COL_ID = "_id";
@@ -14,7 +14,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
 
     public MyOpenHelper(Context context) {
 
-        super(context, filename, null, version);
+        super(context, DATABASE, null, version);
     }
 
     @Override
@@ -23,7 +23,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
         // String result = String.format(" %s %s %s", "FirstString" , "10", "10.0" );
 
         //                                      //TABLE_NAME               take care of id numbers
-        db.execSQL( String.format( "Create table %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT, %s  INTEGER);"
+        db.execSQL( String.format( "Create table %s ( %s INTEGER PRIMARY KEY, %s TEXT, %s  TEXT);"
                 , TABLE_NAME, COL_ID, COL_MEAL_NAME, COL_IMAGE ) );
     }
 
