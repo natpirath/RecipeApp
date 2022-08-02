@@ -181,7 +181,7 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
 
 
             // set the background image of the cardView "the meal image"
-            String url = getItem(position).getMealThumb();
+            String url = getItem(position).getMealImage();
             thumbnail = newView.findViewById(R.id.meal_img);
             // using Glide library we can load an image form a url into an imageView
             // placeholder is what shows while the image is loading
