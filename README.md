@@ -40,7 +40,7 @@ The Recipe App utilizes The Meal DB API to retrieve meal data. You can find the 
 
 # Contributors to the project:
 
-AbdulMajeed Chowdhury
-Caner Altun
-Hamza Khan
+AbdulMajeed Chowdhury,
+Caner Altun,
+Hamza Khan,
 Natalia Mellilo Pirath
