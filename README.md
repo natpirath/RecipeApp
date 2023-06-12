@@ -4,19 +4,19 @@ Welcome to the Recipe App! This app allows you to search for meals based on diff
 
 # Features
 
-1. Search for Meals by Area: You can search for meals based on different areas like Canadian, Mexican, Chinese, etc. The app utilizes The Meal DB API to retrieve a list of meals that match the specified area.
+1. **Search for Meals by Area**: You can search for meals based on different areas like Canadian, Mexican, Chinese, etc. The app utilizes The Meal DB API to retrieve a list of meals that match the specified area.
 
-2. View Meal List: After performing a search, the app displays a list of meal titles that match the search area. You can scroll through the list to find meals that interest you.
+2. **View Meal List**: After performing a search, the app displays a list of meal titles that match the search area. You can scroll through the list to find meals that interest you.
 
-3. Meal Details: When you select a meal from the list, you will be taken to a details page. The details page provides information about the selected meal, including the title, image, and URL. Clicking on the URL will open a web page showing the photo of the meal.
+3. **Meal Details**: When you select a meal from the list, you will be taken to a details page. The details page provides information about the selected meal, including the title, image, and URL. Clicking on the URL will open a web page showing the photo of the meal.
 
-4. Save Favorite Meals: You have the option to save a meal into a list of favorites. The saved meals are stored in a local database for easy access. To save a meal, navigate to the details page and click the "Save as Favorite" button.
+4. **Save Favorite Meals**: You have the option to save a meal into a list of favorites. The saved meals are stored in a local database for easy access. To save a meal, navigate to the details page and click the "Save as Favorite" button.
 
-5. View Favorite Meals: The app provides a "Favorites" button that allows you to view a list of saved meals. Selecting a meal title from the favorites list will display the saved details of that meal, including the title, image, and URL.
+5. **View Favorite Meals**: The app provides a "Favorites" button that allows you to view a list of saved meals. Selecting a meal title from the favorites list will display the saved details of that meal, including the title, image, and URL.
 
-6. Remove from Favorites: In the saved details page, you will find a delete button. Clicking on this button will remove the meal from the list of saved meals as well as from the saved meals database.
+6. **Remove from Favorites**: In the saved details page, you will find a delete button. Clicking on this button will remove the meal from the list of saved meals as well as from the saved meals database.
 
-7. Persistent Search History: The app utilizes SharedPreferences to save the last meal that was searched. The next time you launch the application, the previously searched meal will be displayed, making it easy to resume your recipe exploration.
+7. **Persistent Search History**: The app utilizes SharedPreferences to save the last meal that was searched. The next time you launch the application, the previously searched meal will be displayed, making it easy to resume your recipe exploration.
 
 # Getting Started
 
